@@ -1,0 +1,22 @@
+{
+  "name": "os",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.5.16",
+    "preline": "^2.1.0",
+    "sass": "^1.74.1",
+    "tailwindcss": "^3.4.3"
+  }
+}

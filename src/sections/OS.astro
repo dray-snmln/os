@@ -1,0 +1,348 @@
+---
+// import Layout from '../layouts/Layout.astro'
+import Image from 'astro/components/Image.astro'
+
+import placeholder from '../assets/images/placeholder.png'
+import cp from '../assets/images/CP-Logo.png'
+---
+
+<section>
+  <div class="max-w-[900px] mx-auto grid grd-parent px-4 md:px-6">
+    <div class="grd-images flex flex-col gap-2">
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <div class="grid place-items-center">
+              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
+            </div>
+            <div class="grid place-items-center">
+              <Image class="glide__slide object-fit w-full h-auto" src={cp} alt="Test" />
+            </div>
+
+            <div class="grid place-items-center">
+              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
+            </div>
+
+            <div class="grid place-items-center">
+              <Image class="glide__slide object-fit w-full h-auto" src={cp} alt="Test" />
+            </div>
+            <div class="grid place-items-center">
+              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
+            </div>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+        </div>
+
+        <div class="flex gap-2 glide-bullets mt-2" data-glide-el="controls[nav]">
+          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=0">
+            <Image class="w-full object-fit" src={placeholder} alt="Test" />
+          </div>
+          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=1">
+            <Image class="w-full object-fit" src={cp} alt="Test" />
+          </div>
+          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=2">
+            <Image class="w-full object-fit" src={placeholder} alt="Test" />
+          </div>
+          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=3">
+            <Image class="w-full object-fit" src={cp} alt="Test" />
+          </div>
+          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=4">
+            <Image class="w-full object-fit" src={placeholder} alt="Test" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col grd-details">
+      <ul class="flex justify-between gap-2">
+        <li class="flex flex-col items-center bg-venison text-white w-full min-h-[70px] rounded-md px-[4px] py-2">
+          <div class="h-[32px] text-2xl text-white text-center font-bold">91%</div>
+          <span class="details-vw my-auto text-white text-center text-[11px] font-bold leading-4"
+            >NEW ZEALAND VENISON</span
+          >
+        </li>
+        <li class="flex flex-col items-center bg-venison text-white w-full min-h-[70px] rounded-md px-[4px] py-2">
+          <div class="h-[32px]">
+            <svg
+              class="w-9 h-9 text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 11.917 9.724 16.5 19 7.5"></path>
+            </svg>
+          </div>
+          <span class="details-vw my-auto text-white text-center text-[11px] font-bold leading-4">FREE<br />RANGE</span>
+        </li>
+        <li class="flex flex-col items-center bg-venison text-white w-full min-h-[70px] rounded-md px-[4px] py-2">
+          <div class="h-[32px]">
+            <svg
+              class="w-9 h-9 text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 11.917 9.724 16.5 19 7.5"></path>
+            </svg>
+          </div>
+          <span class="details-vw my-auto text-white text-center text-[11px] font-bold leading-4">GRASS<br />FED</span>
+        </li>
+        <li class="flex flex-col items-center bg-venison text-white w-full min-h-[70px] rounded-md px-[4px] py-2">
+          <div class="h-[32px]">
+            <svg
+              class="w-9 h-9 text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 11.917 9.724 16.5 19 7.5"></path>
+            </svg>
+          </div>
+          <span class="details-vw my-auto text-white text-center text-[11px] font-bold leading-4">OMEGA-35</span>
+        </li>
+      </ul>
+    </div>
+    <div class="grd-title">
+      <h1 class="font-bold mb-2 leading-9" id="#go-to-2-btn">New Zealand Recipe Dog Food Rolls</h1>
+      <div class="flex flex-col mb-4">
+        <div class="flex gap-2 items-center mb-1">
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Star_rating_4.5_of_5.png"
+            alt="4.8 Stars"
+            width="1010"
+            height="215"
+            class="h-[16px] w-auto object-contain"
+          />
+          <span>4.6 Star Rating</span>
+          <span class="underline font-bold">(100 Reviews)</span>
+        </div>
+        <div class="flex flex-col">
+          <p>
+            Max has a medical condition that could have killed him, causing a blockage stopping him being able to go
+            potty. The vet prescribed him [...] a different dog food, and he refused to eat it, as well he got even more
+            sick! He starved himself for an entire week, so he wouldn’t have to eat the food. The owner gave me his
+            trust and I put [...] Max on your food. I checked in this morning and Max has had better poops than ever
+            before, no blockage and he goes absolutely insane for the food so you have won over yet another client of
+            mine!”*
+          </p>
+          <div class="flex gap-3">
+            <span class="font-bold">~ Jessie Paws</span>
+            <span class="text-gray-400 opacity-80">*Results may vary</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <h3>PROTEIN SOURCE:</h3>
+        <ul class="flex w-full justify-between gap-2 mb-2">
+          <div class="grid sm:grid-cols-2 gap-2">
+            <div class="protein-choice">
+              <input
+                type="radio"
+                name="protein-source"
+                class="hidden shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                id="source-lamb"
+              />
+              <label
+                for="source-lamb"
+                class="label-lamb min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                <span class="text-sm text-gray-500 mx-auto">Lamb</span>
+              </label>
+            </div>
+            <div class="protein-choice">
+              <input
+                type="radio"
+                name="protein-source"
+                class="hidden shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                id="source-venison"
+                checked=""
+              />
+              <label
+                for="source-venison"
+                class="label-venison min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                <span class="text-sm text-gray-500 mx-auto">Venison</span>
+              </label>
+            </div>
+          </div>
+        </ul>
+        <h3>FREQUENCY:</h3>
+        <nav class="flex gap-3 mb-2" aria-label="Tabs" role="tablist">
+          <button
+            type="button"
+            class="w-[50%] max-w-[185px] text-2xl font-bold leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none active"
+            id="pills-with-brand-color-item-1"
+            data-hs-tab="#pills-with-brand-color-1"
+            aria-controls="pills-with-brand-color-1"
+            role="tab"
+          >
+            SUBSCRIBE & SAVE XX%
+          </button>
+          <button
+            type="button"
+            class="w-[50%] max-w-[185px] text-2xl font-bold leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none"
+            id="pills-with-brand-color-item-2"
+            data-hs-tab="#pills-with-brand-color-2"
+            aria-controls="pills-with-brand-color-2"
+            role="tab"
+          >
+            ONE TIME PURCHASE
+          </button>
+        </nav>
+
+        <div class="flex">
+          <div
+            id="pills-with-brand-color-1"
+            class="w-full"
+            role="tabpanel"
+            aria-labelledby="pills-with-brand-color-item-1"
+          >
+            <p class="text-gray-500">
+              <h3>PACKAGE:</h3>
+
+              <a
+                href="#"
+                class="flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-3xl py-3 font-bold w-full"
+                >ADD TO CART</a
+              >
+            </p>
+          </div>
+          <div
+            id="pills-with-brand-color-2"
+            class="w-full hidden"
+            role="tabpanel"
+            aria-labelledby="pills-with-brand-color-item-2"
+          >
+            <p class="text-gray-500">
+              <a
+                href="#"
+                class="flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-3xl py-3 font-bold w-full"
+                >ADD TO CART</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script is:inline>
+  new Glide('.glide').mount()
+</script>
+
+<style lang="scss">
+  @use '../styles/sizes' as *;
+  @use '../styles/functions' as *;
+
+  .glide {
+    .glide-bullet {
+      border: 2px solid transparent;
+    }
+
+    .glide__bullet {
+      border: 2px solid blue;
+    }
+    .glide__bullet--active {
+      border: 2px solid;
+    }
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+  }
+
+  .squared {
+    aspect-ratio: 1/1;
+  }
+
+  .protein-choice input:checked {
+    & + label {
+      &.label-lamb {
+        @apply bg-lamb;
+      }
+      &.label-venison {
+        @apply bg-venison;
+      }
+
+      span {
+        @apply text-white font-bold;
+      }
+    }
+  }
+
+  .grd-parent {
+    grid-template-areas:
+      'images'
+      'title'
+      'details ';
+    grid-auto-rows: fit-content;
+    grid-template-columns: 1fr;
+
+    @include sm-up {
+      grid-template-areas:
+        'images title'
+        'details title';
+      grid-auto-rows: auto 1fr;
+      grid-template-columns: 47% 53%;
+    }
+  }
+
+  .grd-images {
+    grid-area: images;
+  }
+
+  .grd-details {
+    grid-area: details;
+
+    @include sm-up {
+      margin-top: 2rem;
+    }
+  }
+
+  .grd-title {
+    grid-area: title;
+
+    @include sm-up {
+      margin-left: 1.3rem;
+    }
+  }
+
+  .grd-package {
+    grid-area: package;
+
+    @include md-up {
+      margin-top: 2rem;
+      margin-left: 1.3rem;
+    }
+  }
+</style>

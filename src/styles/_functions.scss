@@ -1,0 +1,5 @@
+@function getvw($val) {
+  $widthsize: calc(1920px * 0.01);
+  $result: calc(calc($val / $widthsize) * 1vw);
+  @return $result;
+}

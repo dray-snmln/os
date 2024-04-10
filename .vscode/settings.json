@@ -1,0 +1,6 @@
+{
+  "css.experimental.customData": ["tailwindcss"],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
