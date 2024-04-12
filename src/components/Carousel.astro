@@ -1,0 +1,96 @@
+---
+import Image from 'astro/components/Image.astro'
+import placeholder from '../assets/images/placeholder.png'
+import cp from '../assets/images/CP-Logo.png'
+---
+
+<div>
+  <ul class="main-carousel w-full squared mb-2 gap-4">
+    <div class="flex items-center w-full">
+      <Image class="object-contain w-full h-full my-auto" src={placeholder} alt="Test" />
+    </div>
+    <div class="flex items-center w-full">
+      <Image class="object-contain w-full h-full my-auto" src={cp} alt="Test" />
+    </div>
+    <div class="flex items-center w-full">
+      <Image class="object-contain w-full h-full my-auto" src={placeholder} alt="Test" />
+    </div>
+    <div class="flex items-center w-full">
+      <Image class="object-contain w-full h-full my-auto" src={cp} alt="Test" />
+    </div>
+    <div class="flex items-center w-full">
+      <Image class="object-contain w-full h-full my-auto" src={placeholder} alt="Test" />
+    </div>
+  </ul>
+  <ul class="thumbnail-carousel w-full flex gap-2">
+    <div class="cursor-pointer w-full squared active">
+      <Image class="object-contain h-full" src={placeholder} alt="Test" />
+    </div>
+    <div class="cursor-pointer w-full squared">
+      <Image class="object-contain h-full" src={cp} alt="Test" />
+    </div>
+    <div class="cursor-pointer w-full squared">
+      <Image class="object-contain h-full" src={placeholder} alt="Test" />
+    </div>
+    <div class="cursor-pointer w-full squared">
+      <Image class="object-contain h-full" src={cp} alt="Test" />
+    </div>
+    <div class="cursor-pointer w-full squared">
+      <Image class="object-contain h-full" src={placeholder} alt="Test" />
+    </div>
+  </ul>
+</div>
+
+<script>
+  import Flickity from 'flickity'
+  import 'flickity/css/flickity.css'
+
+  // Carousel
+  const mainCarousel = new Flickity('.main-carousel', {
+    asNavFor: '.thumbnail-carousel',
+    cellAlign: 'left',
+    contain: true,
+    pageDots: false,
+    draggable: false,
+    on: {
+      ready: function () {
+        document.querySelector('.main-carousel').classList.add('flex-carousel')
+      },
+      change: function (index) {
+        items.forEach((item) => {
+          item.classList.remove('active')
+        })
+        items[index].classList.add('active')
+      },
+    },
+  })
+
+  const items = document.querySelectorAll('.thumbnail-carousel div')
+
+  items.forEach((item, index) => {
+    item.addEventListener('click', function () {
+      // Remove 'active' class from all items
+      items.forEach((item) => {
+        item.classList.remove('active')
+      })
+      // Add 'active' class to the clicked item
+      this.classList.add('active')
+      mainCarousel.select(index)
+    })
+
+    const carouselButtons = document.querySelectorAll('.flickity-button')
+    carouselButtons.forEach((button) => {
+      console.log('test')
+    })
+  })
+</script>
+
+<style lang="scss">
+  .thumbnail-carousel > div {
+    border: 2px solid transparent;
+
+    &.active {
+      @apply border-cpo;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+import Image from 'astro/components/Image.astro'
+import badge from '../assets/images/badge.png'
+
+const faq = [
+  {
+    subject: 'Stella has Thrived on CountryPet Naturals',
+    description:
+      'My dentist told me Stella’s teeth look great and asked if I was giving her any special dental products. I replied “No”, CountryPet Naturals only! Plus it’s super convenient to get it delivered to my door.',
+    attribution: 'Christine and her 13 yo Dachshund, Stella',
+  },
+  {
+    subject: 'Stella has Thrived on CountryPet Naturals',
+    description:
+      'My dentist told me Stella’s teeth look great and asked if I was giving her any special dental products. I replied “No”, CountryPet Naturals only! Plus it’s super convenient to get it delivered to my door.',
+    attribution: 'Christine and her 13 yo Dachshund, Stella',
+  },
+  {
+    subject: 'Stella has Thrived on CountryPet Naturals',
+    description:
+      'My dentist told me Stella’s teeth look great and asked if I was giving her any special dental products. I replied “No”, CountryPet Naturals only! Plus it’s super convenient to get it delivered to my door.',
+    attribution: 'Christine and her 13 yo Dachshund, Stella',
+  },
+  {
+    subject: 'Stella has Thrived on CountryPet Naturals',
+    description:
+      'My dentist told me Stella’s teeth look great and asked if I was giving her any special dental products. I replied “No”, CountryPet Naturals only! Plus it’s super convenient to get it delivered to my door.',
+    attribution: 'Christine and her 13 yo Dachshund, Stella',
+  },
+  {
+    subject: 'Stella has Thrived on CountryPet Naturals',
+    description:
+      'My dentist told me Stella’s teeth look great and asked if I was giving her any special dental products. I replied “No”, CountryPet Naturals only! Plus it’s super convenient to get it delivered to my door.',
+    attribution: 'Christine and her 13 yo Dachshund, Stella',
+  },
+]
+---
+
+<section>
+  <div class="mx-auto mt-10 grid grd-parent px-4 py-12 md:px-6">
+    <h2 class="text-center text-5xl text-cpb mb-6">What Our Best Friends Are Saying</h2>
+
+    <div class="max-w-[900px] w-full hs-accordion-group mt-6 mb-4 mx-auto md:mb-0">
+      {
+        faq.map((faq, index) => (
+          <div class="flex pt-5 pb-3 gap-5 md:gap-8 border-t first:border-none border-cpo">
+            <div class="relative flex-shrink-0 w-[50px] h-full squared bg-cpo rounded-full text-white text-xl md:text-2xl font-bold">
+              <span class="relative flex items-center -top-[1px] -left-[1px] justify-center w-full h-full">C</span>
+              <span class="absolute bottom-[1px] -end-[2px] inline-flex items-center size-5 rounded-full text-xs font-medium transform">
+                <Image src={badge} alt="" />
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <div id="rating">
+                <div class="flex items-center gap-[3px]">
+                  <svg
+                    class="flex-shrink-0 size-4 text-cpo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                  <svg
+                    class="flex-shrink-0 size-4 text-cpo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                  <svg
+                    class="flex-shrink-0 size-4 text-cpo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                  <svg
+                    class="flex-shrink-0 size-4 text-cpo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                  <svg
+                    class="flex-shrink-0 size-4 text-cpo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                </div>
+              </div>
+              <div id="subject" class="mb-1 text-[1.2rem] font-bold">
+                {faq.subject}
+              </div>
+              <div id="description" class="mb-2 leading-5">
+                {faq.description}
+              </div>
+              <div id="attribution" class="text-[1.05rem] font-bold">
+                {faq.attribution}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss"></style>

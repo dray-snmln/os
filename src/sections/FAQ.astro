@@ -1,0 +1,71 @@
+---
+const faq = [
+  { question: 'What are New Zealand Recipe Dog Food Rolls?', answer: 'Answer 1' },
+  { question: 'What is the Complete Ingredient List?', answer: 'Answer 2' },
+  { question: 'Are the Dog Food Rolls Quality-Checked?', answer: 'Answer 3' },
+  { question: 'How Do I Prep the Dog Food Rolls?', answer: 'Answer 4' },
+  { question: 'What if it doesn’t work for me?', answer: 'Answer 5' },
+]
+---
+
+<section>
+  <div class="mx-auto mt-10 grid grd-parent px-4 py-12 md:px-6 bg-orange-200">
+    <h2 class="text-center text-5xl text-cpo mb-6">Frequently Asked Questions</h2>
+
+    <div class="max-w-[900px] w-full hs-accordion-group mt-6 mb-4 mx-auto md:mb-0">
+      {
+        faq.map((item, index) => (
+          <div class="hs-accordion border-t-2 first:border-none border-white -mt-px">
+            <button
+              class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-bold text-start text-xl text-cpb py-4 px-5 disabled:opacity-50 disabled:pointer-events-none"
+              aria-controls="hs-basic-bordered-collapse"
+            >
+              {item.question}
+              <div class="text-cpo relative">
+                <svg
+                  class="scale-[1.7] hs-accordion-active:hidden block size-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+                <svg
+                  class="scale-[1.7] hs-accordion-active:block hidden size-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+              </div>
+            </button>
+            <div
+              id="hs-basic-bordered-collapse"
+              class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+              aria-labelledby="hs-bordered-heading"
+            >
+              <div class="pb-4 px-5">
+                <p class="text-cpb">{item.answer}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss"></style>

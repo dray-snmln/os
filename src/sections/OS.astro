@@ -1,61 +1,16 @@
 ---
-// import Layout from '../layouts/Layout.astro'
-import Image from 'astro/components/Image.astro'
+import Carousel from '../components/Carousel.astro'
 
-import placeholder from '../assets/images/placeholder.png'
-import cp from '../assets/images/CP-Logo.png'
+import Image from 'astro/components/Image.astro'
 ---
 
 <section>
-  <div class="max-w-[900px] mx-auto grid grd-parent px-4 md:px-6">
+  <div class="max-w-[1000px] mx-auto grid grd-parent px-4 md:px-6">
     <div class="grd-images flex flex-col gap-2">
-      <div class="glide">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-            <div class="grid place-items-center">
-              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
-            </div>
-            <div class="grid place-items-center">
-              <Image class="glide__slide object-fit w-full h-auto" src={cp} alt="Test" />
-            </div>
-
-            <div class="grid place-items-center">
-              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
-            </div>
-
-            <div class="grid place-items-center">
-              <Image class="glide__slide object-fit w-full h-auto" src={cp} alt="Test" />
-            </div>
-            <div class="grid place-items-center">
-              <Image class="glide__slide object-fit w-full h-auto" src={placeholder} alt="Test" />
-            </div>
-          </ul>
-        </div>
-        <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-        </div>
-
-        <div class="flex gap-2 glide-bullets mt-2" data-glide-el="controls[nav]">
-          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=0">
-            <Image class="w-full object-fit" src={placeholder} alt="Test" />
-          </div>
-          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=1">
-            <Image class="w-full object-fit" src={cp} alt="Test" />
-          </div>
-          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=2">
-            <Image class="w-full object-fit" src={placeholder} alt="Test" />
-          </div>
-          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=3">
-            <Image class="w-full object-fit" src={cp} alt="Test" />
-          </div>
-          <div class="glide-bullet w-[20%] squared grid place-items-center" data-glide-dir="=4">
-            <Image class="w-full object-fit" src={placeholder} alt="Test" />
-          </div>
-        </div>
-      </div>
+      <Carousel />
     </div>
-    <div class="flex flex-col grd-details">
+
+    <div class="grd-details flex flex-col mt-4 md:mt-0">
       <ul class="flex justify-between gap-2">
         <li class="flex flex-col items-center bg-venison text-white w-full min-h-[70px] rounded-md px-[4px] py-2">
           <div class="h-[32px] text-2xl text-white text-center font-bold">91%</div>
@@ -127,153 +82,434 @@ import cp from '../assets/images/CP-Logo.png'
           <span class="details-vw my-auto text-white text-center text-[11px] font-bold leading-4">OMEGA-35</span>
         </li>
       </ul>
-    </div>
-    <div class="grd-title">
-      <h1 class="font-bold mb-2 leading-9" id="#go-to-2-btn">New Zealand Recipe Dog Food Rolls</h1>
-      <div class="flex flex-col mb-4">
-        <div class="flex gap-2 items-center mb-1">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Star_rating_4.5_of_5.png"
-            alt="4.8 Stars"
-            width="1010"
-            height="215"
-            class="h-[16px] w-auto object-contain"
-          />
-          <span>4.6 Star Rating</span>
-          <span class="underline font-bold">(100 Reviews)</span>
+      <div class="hs-accordion-group mt-6 mb-4 md:mb-0">
+        <div class="hs-accordion bg-white border border-cpo -mt-px" id="hs-bordered-heading-one">
+          <button
+            class="hs-accordion-toggle hs-accordion-active:text-cpo inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 disabled:opacity-50 disabled:pointer-events-none"
+            aria-controls="hs-basic-bordered-collapse-one"
+          >
+            Product Details
+            <svg
+              class="hs-accordion-active:hidden block size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+            <svg
+              class="hs-accordion-active:block hidden size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m18 15-6-6-6 6"></path>
+            </svg>
+          </button>
+          <div
+            id="hs-basic-bordered-collapse-one"
+            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            aria-labelledby="hs-bordered-heading-one"
+          >
+            <div class="pb-4 px-5">
+              <p class="text-gray-800">Test</p>
+            </div>
+          </div>
         </div>
-        <div class="flex flex-col">
-          <p>
-            Max has a medical condition that could have killed him, causing a blockage stopping him being able to go
-            potty. The vet prescribed him [...] a different dog food, and he refused to eat it, as well he got even more
-            sick! He starved himself for an entire week, so he wouldn’t have to eat the food. The owner gave me his
-            trust and I put [...] Max on your food. I checked in this morning and Max has had better poops than ever
-            before, no blockage and he goes absolutely insane for the food so you have won over yet another client of
-            mine!”*
-          </p>
-          <div class="flex gap-3">
-            <span class="font-bold">~ Jessie Paws</span>
-            <span class="text-gray-400 opacity-80">*Results may vary</span>
+
+        <div class="hs-accordion bg-white border border-cpo -mt-px" id="hs-bordered-heading-two">
+          <button
+            class="hs-accordion-toggle hs-accordion-active:text-cpo inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 disabled:opacity-50 disabled:pointer-events-none"
+            aria-controls="hs-basic-bordered-collapse-two"
+          >
+            Guaranteed Analysis
+            <svg
+              class="hs-accordion-active:hidden block size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+            <svg
+              class="hs-accordion-active:block hidden size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m18 15-6-6-6 6"></path>
+            </svg>
+          </button>
+          <div
+            id="hs-basic-bordered-collapse-two"
+            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            aria-labelledby="hs-bordered-heading-two"
+          >
+            <div class="pb-4 px-5">
+              <p class="text-gray-800">Test</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hs-accordion bg-white border border-cpo -mt-px" id="hs-bordered-heading-three">
+          <button
+            class="hs-accordion-toggle hs-accordion-active:text-cpo inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 disabled:opacity-50 disabled:pointer-events-none"
+            aria-controls="hs-basic-bordered-collapse-three"
+          >
+            Feeding Guide
+            <svg
+              class="hs-accordion-active:hidden block size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+            <svg
+              class="hs-accordion-active:block hidden size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m18 15-6-6-6 6"></path>
+            </svg>
+          </button>
+          <div
+            id="hs-basic-bordered-collapse-three"
+            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            aria-labelledby="hs-bordered-heading-three"
+          >
+            <div class="pb-4 px-5">
+              <p class="text-gray-800">Test</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="flex flex-col">
+    </div>
+
+    <div class="grd-title">
+      <div>
+        <h1 class="font-bold mb-2 leading-9" id="#go-to-2-btn">New Zealand Recipe Dog Food Rolls</h1>
+        <div class="flex flex-col mb-4">
+          <div class="flex gap-2 items-center mb-1">
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Star_rating_4.5_of_5.png"
+              alt="4.8 Stars"
+              width="1010"
+              height="215"
+              class="h-[16px] w-auto object-contain"
+            />
+            <span>4.6 Star Rating</span>
+            <span class="underline font-bold">(100 Reviews)</span>
+          </div>
+          <div class="flex flex-col">
+            <p>
+              Max has a medical condition that could have killed him, causing a blockage stopping him being able to go
+              potty. The vet prescribed him [...] a different dog food, and he refused to eat it, as well he got even
+              more sick! He starved himself for an entire week, so he wouldn’t have to eat the food. The owner gave me
+              his trust and I put [...] Max on your food. I checked in this morning and Max has had better poops than
+              ever before, no blockage and he goes absolutely insane for the food so you have won over yet another
+              client of mine!”*
+            </p>
+            <div class="flex gap-3">
+              <span class="font-bold">~ Jessie Paws</span>
+              <span class="text-gray-400 opacity-80">*Results may vary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
         <h3>PROTEIN SOURCE:</h3>
         <ul class="flex w-full justify-between gap-2 mb-2">
-          <div class="grid sm:grid-cols-2 gap-2">
-            <div class="protein-choice">
-              <input
-                type="radio"
-                name="protein-source"
-                class="hidden shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                id="source-lamb"
-              />
+          <div class="protein-list grid grid-cols-2 gap-2">
+            <div>
+              <input type="radio" name="protein-source" class="hidden" id="source-lamb" value="lamb" checked />
               <label
+                data-value="lamb"
                 for="source-lamb"
-                class="label-lamb min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                class="selected protein-choice label-lamb min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <span class="text-sm text-gray-500 mx-auto">Lamb</span>
               </label>
             </div>
-            <div class="protein-choice">
-              <input
-                type="radio"
-                name="protein-source"
-                class="hidden shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                id="source-venison"
-                checked=""
-              />
+            <div>
+              <input type="radio" name="protein-source" class="hidden" id="source-venison" value="venison" />
               <label
+                data-value="venison"
                 for="source-venison"
-                class="label-venison min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+                class="protein-choice label-venison min-w-[80px] hover:cursor-pointer flex flex-col p-3 w-full bg-white border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <span class="text-sm text-gray-500 mx-auto">Venison</span>
               </label>
             </div>
           </div>
         </ul>
+      </div>
+
+      <div class="flex flex-col">
         <h3>FREQUENCY:</h3>
         <nav class="flex gap-3 mb-2" aria-label="Tabs" role="tablist">
           <button
             type="button"
-            class="w-[50%] max-w-[185px] text-2xl font-bold leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none active"
+            class="selected frequency-choice w-[50%] max-w-[185px] text-md md:text-2xl font-bold leading-5 md:leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none active"
             id="pills-with-brand-color-item-1"
             data-hs-tab="#pills-with-brand-color-1"
             aria-controls="pills-with-brand-color-1"
             role="tab"
+            data-value="sub"
           >
             SUBSCRIBE & SAVE XX%
           </button>
           <button
             type="button"
-            class="w-[50%] max-w-[185px] text-2xl font-bold leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none"
+            class="frequency-choice w-[50%] max-w-[185px] text-md md:text-2xl font-bold leading-5 md:leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none"
             id="pills-with-brand-color-item-2"
             data-hs-tab="#pills-with-brand-color-2"
             aria-controls="pills-with-brand-color-2"
             role="tab"
+            data-value="onetime"
           >
             ONE TIME PURCHASE
           </button>
         </nav>
+      </div>
 
-        <div class="flex">
-          <div
-            id="pills-with-brand-color-1"
-            class="w-full"
-            role="tabpanel"
-            aria-labelledby="pills-with-brand-color-item-1"
-          >
-            <p class="text-gray-500">
-              <h3>PACKAGE:</h3>
+      <div class="flex">
+        <div
+          id="pills-with-brand-color-1"
+          class="w-full"
+          role="tabpanel"
+          aria-labelledby="pills-with-brand-color-item-1"
+        >
+          <p class="text-gray-500">
+            <h3>PACKAGE:</h3>
+            <ul class="package max-w-full flex flex-col mb-4">
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+              >
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="package-1"
+                    class="package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer selected"
+                    data-value="sub1"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="package-1"
+                        name="package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                        checked
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      1 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
+                      $XX.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
 
-              <a
-                href="#"
-                class="flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-3xl py-3 font-bold w-full"
-                >ADD TO CART</a
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
               >
-            </p>
-          </div>
-          <div
-            id="pills-with-brand-color-2"
-            class="w-full hidden"
-            role="tabpanel"
-            aria-labelledby="pills-with-brand-color-item-2"
-          >
-            <p class="text-gray-500">
-              <a
-                href="#"
-                class="flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-3xl py-3 font-bold w-full"
-                >ADD TO CART</a
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="package-2"
+                    class="relative bestseller package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
+                    data-value="sub2"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="package-2"
+                        name="package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      2 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
+                      $XX.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
               >
-            </p>
-          </div>
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="package-3"
+                    class="relative bestvalue package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
+                    data-value="sub3"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="package-3"
+                        name="package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      3 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
+                      $XX.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+            </ul>
+          </p>
+        </div>
+        <div
+          id="pills-with-brand-color-2"
+          class="w-full hidden"
+          role="tabpanel"
+          aria-labelledby="pills-with-brand-color-item-2"
+        >
         </div>
       </div>
+
+      <a
+        href="#"
+        target="_blank"
+        class="cart-sub flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-3xl py-3 font-bold w-full"
+        >ADD TO CART</a
+      >
     </div>
   </div>
 </section>
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-<script is:inline>
-  new Glide('.glide').mount()
+<script>
+  // Links
+  const links = {
+    lamb: {
+      onetime: 'lamb-onetime-link',
+      sub1: 'lamb-sub1-link',
+      sub2: 'lamb-sub2-link',
+      sub3: 'lamb-sub3-link',
+    },
+    venison: {
+      onetime: 'venison-onetime-link',
+      sub1: 'venison-sub1-link',
+      sub2: 'venison-sub2-link',
+      sub3: 'venison-sub3-link',
+    },
+  }
+
+  // Cart
+  const proteins = document.querySelectorAll('.protein-choice')
+  const proteinChoice = document.querySelector('.protein-choice.selected').getAttribute('data-value')
+  const frequencies = document.querySelectorAll('.frequency-choice')
+  const frequencyChoice = document.querySelector('.frequency-choice.selected').getAttribute('data-value')
+  const packages = document.querySelectorAll('.package-choice')
+  const packageChoice = document.querySelector('.package-choice.selected').getAttribute('data-value')
+  const cartButton = document.querySelector('.cart-sub')
+
+  let currentProtein = proteinChoice
+  let currentFrequency = frequencyChoice
+  let currentPackage = packageChoice
+
+  const updateLink = () => {
+    if (currentFrequency === 'onetime') {
+      cartButton.setAttribute('href', `${links[currentProtein][currentFrequency]}`)
+      cartButton.textContent = `${links[currentProtein][currentFrequency]}`
+    } else {
+      cartButton.setAttribute('href', `${links[currentProtein][currentPackage]}`)
+      cartButton.textContent = `${links[currentProtein][currentPackage]}`
+    }
+  }
+
+  updateLink()
+
+  const addListeners = (query) => {
+    query.forEach((protein, index) => {
+      protein.addEventListener('click', () => {
+        query.forEach((protein) => {
+          protein.classList.remove('selected')
+        })
+
+        if (query === proteins) {
+          currentProtein = query[index].getAttribute('data-value')
+        } else if (query === frequencies) {
+          currentFrequency = query[index].getAttribute('data-value')
+        } else if (query === packages) {
+          currentPackage = query[index].getAttribute('data-value')
+        }
+
+        query[index].classList.add('selected')
+        updateLink()
+      })
+    })
+  }
+
+  addListeners(proteins)
+  addListeners(frequencies)
+  addListeners(packages)
 </script>
 
 <style lang="scss">
   @use '../styles/sizes' as *;
   @use '../styles/functions' as *;
-
-  .glide {
-    .glide-bullet {
-      border: 2px solid transparent;
-    }
-
-    .glide__bullet {
-      border: 2px solid blue;
-    }
-    .glide__bullet--active {
-      border: 2px solid;
-    }
-  }
 
   h3 {
     font-size: 1.125rem;
@@ -281,21 +517,69 @@ import cp from '../assets/images/CP-Logo.png'
     margin-bottom: 0.2rem;
   }
 
-  .squared {
-    aspect-ratio: 1/1;
+  .protein-list {
+    input:checked {
+      & + label {
+        &.label-lamb {
+          @apply bg-lamb border-lamb;
+        }
+        &.label-venison {
+          @apply bg-venison border-venison;
+        }
+
+        span {
+          @apply text-white font-bold;
+        }
+      }
+    }
   }
 
-  .protein-choice input:checked {
-    & + label {
-      &.label-lamb {
-        @apply bg-lamb;
+  .package {
+    input:checled {
+      & + div {
+        @apply bg-cpo;
+        position: relative;
+        &::after {
+          @apply invert;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          content: '';
+          display: block;
+          background-image: url('data:image/svg+xml, <svg class="w-9 h-9" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" ><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"></path></svg>');
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 90%;
+          height: 90%;
+          z-index: 2;
+        }
       }
-      &.label-venison {
-        @apply bg-venison;
+    }
+    .bestseller {
+      &::before {
+        content: 'BEST SELLER';
       }
+    }
 
-      span {
-        @apply text-white font-bold;
+    .bestvalue {
+      &::before {
+        content: 'BEST VALUE';
+      }
+    }
+
+    .bestseller,
+    .bestvalue {
+      &::before {
+        content: 'BEST VALUE';
+        @apply absolute grid place-items-center bg-cpo text-white;
+        top: 0;
+        left: 0;
+        padding: 0 13px;
+        font-size: 1rem !important;
+        font-weight: bold;
+        border-bottom-right-radius: 10px;
+        height: 26px;
       }
     }
   }
@@ -303,12 +587,13 @@ import cp from '../assets/images/CP-Logo.png'
   .grd-parent {
     grid-template-areas:
       'images'
-      'title'
-      'details ';
-    grid-auto-rows: fit-content;
+      'details'
+      'title';
+    grid-auto-rows: repeat(3, auto);
     grid-template-columns: 1fr;
 
     @include sm-up {
+      display: grid;
       grid-template-areas:
         'images title'
         'details title';
@@ -333,15 +618,6 @@ import cp from '../assets/images/CP-Logo.png'
     grid-area: title;
 
     @include sm-up {
-      margin-left: 1.3rem;
-    }
-  }
-
-  .grd-package {
-    grid-area: package;
-
-    @include md-up {
-      margin-top: 2rem;
       margin-left: 1.3rem;
     }
   }

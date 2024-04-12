@@ -5,7 +5,7 @@ export default {
       colors: {
         cpo: {
           DEFAULT: '#f06423',
-          light: '#ff8c53', // Lighter shade
+          light: '#fce0d4', // Lighter shade
           dark: '#c94e1c', // Darker shade
         },
         cpb: {
@@ -20,6 +20,7 @@ export default {
         },
         lamb: '#35b997',
         venison: '#957daa',
+        save: '#b4be37',
       },
     },
   },

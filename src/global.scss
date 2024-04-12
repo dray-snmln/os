@@ -93,3 +93,12 @@ blockquote {
     height: 100px;
   }
 }
+
+.flex-carousel .flickity-slider {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.squared {
+  aspect-ratio: 1/1;
+}

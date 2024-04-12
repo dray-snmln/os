@@ -1,0 +1,29 @@
+---
+import Image from 'astro/components/Image.astro'
+
+import dogtor from '../assets/images/dogtor.png'
+---
+
+<section>
+  <div class="relative background mx-auto grid grd-parent px-4 pt-10 md:px-6">
+    <Image src={dogtor} alt="Dogtor" class="mx-auto mb-6 block md:hidden bottom-0 right-0" />
+    <h2 class="relative text-center text-5xl text-white mb-10 z-10">About (Insert Guru Here)</h2>
+    <div class="relative max-w-[900px] mx-auto md:pr-[300px] z-0 pb-16">
+      <Image src={dogtor} alt="Dogtor" width="270" class="mx-auto hidden md:block md:absolute bottom-0 right-0" />
+      <p class="text-xl text-white">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Eget gravida cum sociis natoque penatibus. Odio ut enim blandit volutpat maecenas volutpat blandit
+        aliquam etiam. Sapien et ligula ullamcorper malesuada proin. Turpis tincidunt id aliquet risus feugiat in.
+        Pulvinar etiam non quam lacus suspendisse faucibus interdum. Ultricies mi eget mauris pharetra. Nunc eget lorem
+        dolor sed viverra ipsum nunc aliquet. Neque laoreet suspendisse interdum consectetur libero id faucibus. Ut
+        placerat orci nulla pellentesque dignissim enim sit amet.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .background {
+    background-color: #676058;
+  }
+</style>
