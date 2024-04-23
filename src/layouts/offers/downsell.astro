@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets'
+
+const images = import.meta.glob('/src/assets/images/products/*.{jpeg,jpg,png,gif}')
+const { slug, type, title, quantity, price, sellingPlan, productId, image } = Astro.props
+if (!images[image])
+  throw new Error(`"${image}" does not exist in glob: "/src/assets/images/products/*.{jpeg,jpg,png,gif}"`)
+---
+
+<section class="min-h-[50vh] max-w-[700px] mx-auto mt-10">
+  <div class="max-w-[80%] mx-auto mb-10">
+    <!-- Stepper -->
+    <ul class="relative flex flex-row gap-x-2 mx-auto">
+      <!-- Item -->
+      <li class="shrink basis-0 flex-1 group">
+        <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+          <span
+            class="size-7 flex justify-center items-center flex-shrink-0 bg-orange-300 font-medium text-white rounded-full"
+          >
+            1
+          </span>
+          <div class="ms-2 w-full h-px flex-1 bg-gray-200 group-last:hidden"></div>
+        </div>
+        <div class="mt-3">
+          <span class="relative block size-7 rounded-full">
+            <span
+              class="inline-flex whitespace-normal sm:whitespace-nowrap absolute left-1/2 -translate-x-1/2 text-center text-sm font-medium text-gray-800"
+            >
+              Order Approved
+            </span>
+          </span>
+        </div>
+      </li>
+      <!-- End Item -->
+
+      <!-- Item -->
+      <li class="shrink basis-0 flex-1 group">
+        <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+          <span
+            class="size-7 flex justify-center items-center flex-shrink-0 bg-cpo font-medium text-white rounded-full"
+          >
+            2
+          </span>
+          <div class="ms-2 w-full h-px flex-1 bg-gray-200 group-last:hidden"></div>
+        </div>
+        <div class="mt-3">
+          <span class="relative block size-7 rounded-full mb-4 md:mb-0">
+            <span
+              class="inline-flex whitespace-normal sm:whitespace-nowrap absolute left-1/2 -translate-x-1/2 text-center text-sm font-medium text-gray-800"
+            >
+              Product Options
+            </span>
+          </span>
+        </div>
+      </li>
+      <!-- End Item -->
+
+      <!-- Item -->
+      <li class="shrink basis-0 flex-1 group" style="max-width: fit-content;">
+        <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+          <span
+            class="size-7 flex justify-center items-center flex-shrink-0 bg-orange-300 font-medium text-white rounded-full"
+          >
+            3
+          </span>
+          <div class="ms-2 w-full h-px flex-1 bg-gray-200 group-last:hidden"></div>
+        </div>
+        <div class="mt-3">
+          <span class="relative block size-7 rounded-full">
+            <span
+              class="inline-flex whitespace-normal sm:whitespace-nowrap absolute left-1/2 -translate-x-1/2 text-center text-sm font-medium text-gray-800"
+            >
+              Final Confirmation
+            </span>
+          </span>
+        </div>
+      </li>
+      <!-- End Item -->
+    </ul>
+    <!-- End Stepper -->
+  </div>
+
+  <div class="layout-1">
+    <h2 class="text-center text-cpo font-normal">WAIT! Hang On!</h2>
+    <div class="flex flex-col gap-4">
+      <p>
+        We understand that <span class="replace-with-previous replace-units">some units</span> of
+        <span class="replace-with-previous replace-products">products</span> may be too much of a commitment right now, but
+        we still want you to enjoy all the digestive benefits from
+        <span class="replace replace-products">products</span>, and some savings, too.
+      </p>
+      <p>
+        That's why we wanted to make sure to pass along a special price on
+        <span class="replace replace-units">3 units</span> of <span class="replace replace-products">products</span>.
+      </p>
+      <p>We know you'll love the way it makes you feel, so give it a try today!</p>
+    </div>
+  </div>
+
+  <h1 class="mb-2 leading-8">{title}{` - ${quantity} Unit${quantity > 1 ? 's' : ''}`}</h1>
+  <h2 class="mb-2 leading-8">{type}</h2>
+  <h2 class="mb-8 text-2xl">${price}</h2>
+
+  <div
+    id="product"
+    class="flex w-full max-w-[50%] gap-3"
+    data-slug={slug}
+    data-title={title}
+    data-type={type}
+    data-quantity={quantity}
+    data-selling-plan={sellingPlan}
+    data-product-id={productId}
+  >
+    <Image src={images[image]()} alt="" class="max-w-[50%]" inferSize />
+    <div class="flex flex-col w-full justify-center">
+      <button
+        class="button button-accept flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-xl p-3 w-full"
+        >Yes! I Want This Special Added To My Order</button
+      >
+      <span class="flex items-center justify-center text-center"> - OR - </span>
+      <button
+        class="button button-decline flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-gray-300 hover:opacity-90 transition bg-cps text-white text-xl p-3 w-full"
+        >Decline</button
+      >
+    </div>
+  </div>
+</section>
+
+<style lang="scss"></style>

@@ -102,3 +102,27 @@ blockquote {
 .squared {
   aspect-ratio: 1/1;
 }
+/* Apply basic styling to the table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Apply borders to table cells */
+td,
+th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+/* Apply alternate background color to table rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style the header row */
+th {
+  background-color: #dddddd;
+  text-align: left;
+}

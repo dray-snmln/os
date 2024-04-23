@@ -24,3 +24,10 @@ import About from '../sections/About.astro'
   </main>
   <Footer />
 </Layout>
+
+<script is:inline>
+  let storedJSON = localStorage.getItem('cart') ? localStorage.getItem('cart') : []
+  let storedObjects = storedJSON.length !== 0 ? JSON.parse(storedJSON) : []
+  console.log(storedJSON)
+  console.log(storedObjects)
+</script>

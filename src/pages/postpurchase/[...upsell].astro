@@ -1,0 +1,187 @@
+---
+import Header from '../../layouts/Header.astro'
+import Footer from '../../layouts/Footer.astro'
+import Layout from '../../layouts/Layout.astro'
+import Upsell from '../../layouts/offers/upsell.astro'
+import data from '../../assets/products.js'
+
+export async function getStaticPaths() {
+  const pages = []
+  for (const item of data.products) {
+    pages.push({ ...item })
+  }
+
+  return pages.map(({ slug, type, title, quantity, price, selling_plan, product_id, image }) => {
+    let upsell = 'u-' + slug
+    return {
+      params: { upsell },
+      props: { slug, type, title, quantity, price, selling_plan, product_id, image },
+    }
+  })
+}
+
+const { slug, type, title, quantity, price, image, selling_plan, product_id } = Astro.props
+---
+
+<Layout title={title}>
+  <Header />
+  <Upsell
+    slug={slug}
+    type={type}
+    title={title}
+    quantity={quantity}
+    price={price}
+    image={image}
+    sellingPlan={selling_plan}
+    productId={product_id}
+    offerType="upsell"
+  />
+  <div id="table-container" class="max-w-[500px] mx-auto my-6">URL Parameters</div>
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ data }}>
+  data.collections = {}
+  for (const product of data.products) {
+    !data.collections[product.type] ? (data.collections[product.type] = 1) : (data.collections[product.type] += 1)
+  }
+  console.log(data.collections)
+  console.log(data.products)
+
+  // Get current product information
+  const currentProductData = document.querySelector('#product')
+  const currentProduct = {
+    slug: currentProductData.getAttribute('data-slug'),
+    quantity: currentProductData.getAttribute('data-quantity'),
+    sellingPlan: currentProductData.getAttribute('data-selling-plan'),
+    productId: currentProductData.getAttribute('data-product-id'),
+  }
+
+  console.log(currentProduct)
+
+  // Funnel logic
+  // DONE: increment upsell and downsell count
+  // DONE: end flow when 3 accepts total
+  // TODO: change page content based on count and offer type
+
+  // Get URL Params
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+
+  const clearStorage = () => {
+    localStorage.removeItem('cart')
+    localStorage.removeItem('originalProduct')
+    console.log('cart cleared')
+  }
+
+  // Check original product in local storage
+  const getStored = (name) => {
+    let storedObject = localStorage.getItem(name)
+    return storedObject ? JSON.parse(storedObject) : null
+  }
+
+  // Cart logic
+  let storedJSON = getStored('cart') ? getStored('cart') : []
+  let storedObjects = storedJSON.length !== 0 ? storedJSON : []
+  console.log(storedJSON)
+
+  // Check number of accepts
+  const checkAccept = (objects) => {
+    let count = 0
+    for (let obj of objects) {
+      if (obj.accepted === true) {
+        count++
+      }
+    }
+    console.log(count > 2 ? 'Ending funnel' : 'Continue funnel')
+  }
+
+  // Iterate through URL Query Parameters
+  for (const [key, value] of Object.entries(params)) {
+    // Clear local storage when URL has new=true parameter
+    if (key === 'new' && value === 'true') {
+      console.log('Key "new" has a value of true. Executing code...')
+      clearStorage()
+    }
+
+    // Store original product's product type in local storage when provided
+    if (key === 'ogpr') {
+      // Find the product with the matching slug in
+      let product = data.products.find((item) => item.slug === value)
+
+      // If the product is found, store its type; otherwise, return null
+      if (product) {
+        let newJSON = { type: product.slug, quantity: product.quantity, title: product.title }
+        localStorage.setItem('originalProduct', JSON.stringify(newJSON))
+
+        console.log(getStored('originalProduct'))
+      }
+    }
+  }
+
+  // Button setup
+  const setupButtons = () => {
+    const acceptButtons = document.querySelectorAll('.button.button-accept')
+    const declineButtons = document.querySelectorAll('.button.button-decline')
+
+    for (button of acceptButtons) {
+      button.addEventListener('click', () => {
+        let updatedProduct = { ...currentProduct, ['accepted']: true }
+        let updatedObjects = [...storedObjects]
+        updatedObjects.push(updatedProduct)
+        let updatedJSON = JSON.stringify(updatedObjects)
+        localStorage.setItem('cart', updatedJSON)
+        console.log(updatedJSON)
+        checkAccept(updatedObjects)
+      })
+    }
+
+    for (button of declineButtons) {
+      button.addEventListener('click', () => {
+        let updatedProduct = { ...currentProduct, ['accepted']: false }
+        let updatedObjects = [...storedObjects]
+        updatedObjects.push(updatedProduct)
+        let updatedJSON = JSON.stringify(updatedObjects)
+        localStorage.setItem('cart', updatedJSON)
+        console.log(storedJSON)
+        checkAccept(updatedObjects)
+      })
+    }
+  }
+
+  setupButtons()
+
+  // Set up URL query table
+  function createTableFromObject(obj) {
+    // Create table element
+    const table = document.createElement('table')
+
+    // Loop through key-value pairs of the object
+    for (const [key, value] of Object.entries(obj)) {
+      // Create table row
+      const row = document.createElement('tr')
+
+      // Create table data cells for key and value
+      const keyCell = document.createElement('td')
+      keyCell.textContent = key
+      const valueCell = document.createElement('td')
+      valueCell.textContent = value
+
+      // Append cells to row
+      row.appendChild(keyCell)
+      row.appendChild(valueCell)
+
+      // Append row to table
+      table.appendChild(row)
+    }
+
+    return table
+  }
+
+  // Get container element to append table
+  const container = document.getElementById('table-container')
+
+  // Create table from object and append to container
+  const table = createTableFromObject(params)
+  container.appendChild(table)
+</script>

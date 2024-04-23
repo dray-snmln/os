@@ -5,7 +5,7 @@ import Image from 'astro/components/Image.astro'
 ---
 
 <section>
-  <div class="max-w-[1000px] mx-auto grid grd-parent px-4 md:px-6">
+  <div class="max-w-[1000px] mx-auto mt-10 grid grd-parent px-4 md:px-6">
     <div class="grd-images flex flex-col gap-2">
       <Carousel />
     </div>
@@ -289,9 +289,9 @@ import Image from 'astro/components/Image.astro'
           <button
             type="button"
             class="selected frequency-choice w-[50%] max-w-[185px] text-md md:text-2xl font-bold leading-5 md:leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none active"
-            id="pills-with-brand-color-item-1"
-            data-hs-tab="#pills-with-brand-color-1"
-            aria-controls="pills-with-brand-color-1"
+            id="sub-item"
+            data-hs-tab="#sub-tab"
+            aria-controls="sub-tab"
             role="tab"
             data-value="sub"
           >
@@ -300,9 +300,9 @@ import Image from 'astro/components/Image.astro'
           <button
             type="button"
             class="frequency-choice w-[50%] max-w-[185px] text-md md:text-2xl font-bold leading-5 md:leading-7 hs-tab-active:bg-cpo hs-tab-active:text-white hs-tab-active:py-3 px-4 inline-flex items-center gap-x-2 border border-black bg-transparent text-center hover:bg-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none"
-            id="pills-with-brand-color-item-2"
-            data-hs-tab="#pills-with-brand-color-2"
-            aria-controls="pills-with-brand-color-2"
+            id="onetime-item"
+            data-hs-tab="#onetime-tab"
+            aria-controls="onetime-tab"
             role="tab"
             data-value="onetime"
           >
@@ -311,32 +311,26 @@ import Image from 'astro/components/Image.astro'
         </nav>
       </div>
 
-      <div class="flex">
-        <div
-          id="pills-with-brand-color-1"
-          class="w-full"
-          role="tabpanel"
-          aria-labelledby="pills-with-brand-color-item-1"
-        >
-          <p class="text-gray-500">
-            <h3>PACKAGE:</h3>
+      <div class="flex flex-col">
+        <h3>PACKAGE:</h3>
+        <div id="sub-tab" class="w-full" role="tabpanel" aria-labelledby="sub-item">
+          <p>
             <ul class="package max-w-full flex flex-col mb-4">
               <li
                 class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
               >
                 <div class="relative flex items-start w-full">
                   <label
-                    for="package-1"
-                    class="package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer selected"
-                    data-value="sub1"
+                    for="sub-package-1"
+                    class="package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
+                    data-value="1"
                   >
                     <div class="flex items-center gap-2">
                       <input
-                        id="package-1"
-                        name="package"
+                        id="sub-package-1"
+                        name="sub-package"
                         type="radio"
                         class="hidden border-red rounded-full disabled:opacity-50"
-                        checked
                       />
                       <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
                       1 UNITS
@@ -346,8 +340,8 @@ import Image from 'astro/components/Image.astro'
                     >
                       SAVE $XX
                     </div>
-                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
-                      $XX.XX
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $11.XX
                       <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
                     </div>
                   </label>
@@ -359,16 +353,17 @@ import Image from 'astro/components/Image.astro'
               >
                 <div class="relative flex items-start w-full">
                   <label
-                    for="package-2"
-                    class="relative bestseller package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
-                    data-value="sub2"
+                    for="sub-package-2"
+                    class="relative bestseller package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer selected"
+                    data-value="2"
                   >
                     <div class="flex items-center gap-2">
                       <input
-                        id="package-2"
-                        name="package"
+                        id="sub-package-2"
+                        name="sub-package"
                         type="radio"
                         class="hidden border-red rounded-full disabled:opacity-50"
+                        checked
                       />
                       <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
                       2 UNITS
@@ -378,8 +373,8 @@ import Image from 'astro/components/Image.astro'
                     >
                       SAVE $XX
                     </div>
-                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
-                      $XX.XX
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $22.XX
                       <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
                     </div>
                   </label>
@@ -391,14 +386,14 @@ import Image from 'astro/components/Image.astro'
               >
                 <div class="relative flex items-start w-full">
                   <label
-                    for="package-3"
+                    for="sub-package-3"
                     class="relative bestvalue package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
-                    data-value="sub3"
+                    data-value="3"
                   >
                     <div class="flex items-center gap-2">
                       <input
-                        id="package-3"
-                        name="package"
+                        id="sub-package-3"
+                        name="sub-package"
                         type="radio"
                         class="hidden border-red rounded-full disabled:opacity-50"
                       />
@@ -410,8 +405,8 @@ import Image from 'astro/components/Image.astro'
                     >
                       SAVE $XX
                     </div>
-                    <div class="flex flex-col ml-auto text-2xl text-center ml-6 rounded-full">
-                      $XX.XX
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $33.XX
                       <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
                     </div>
                   </label>
@@ -420,12 +415,107 @@ import Image from 'astro/components/Image.astro'
             </ul>
           </p>
         </div>
-        <div
-          id="pills-with-brand-color-2"
-          class="w-full hidden"
-          role="tabpanel"
-          aria-labelledby="pills-with-brand-color-item-2"
-        >
+        <div id="onetime-tab" class="w-full hidden" role="tabpanel" aria-labelledby="onetime-item">
+          <p>
+            <ul class="package max-w-full flex flex-col mb-4">
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+              >
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="onetime-package-1"
+                    class="package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
+                    data-value="1"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="onetime-package-1"
+                        name="onetime-package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      1 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $44.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+              >
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="onetime-package-2"
+                    class="relative bestseller package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer selected"
+                    data-value="2"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="onetime-package-2"
+                        name="onetime-package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                        checked
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      2 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $55.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+
+              <li
+                class="inline-flex items-center text-sm font-medium bg-white hover:bg-cpo-light border border-black text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+              >
+                <div class="relative flex items-start w-full">
+                  <label
+                    for="onetime-package-3"
+                    class="relative bestvalue package-choice flex items-center gap-2 py-4 pl-3 pr-6 w-full text-[1.1rem] md:text-lg text-cpb font-bold cursor-pointer"
+                    data-value="3"
+                  >
+                    <div class="flex items-center gap-2">
+                      <input
+                        id="onetime-package-3"
+                        name="onetime-package"
+                        type="radio"
+                        class="hidden border-red rounded-full disabled:opacity-50"
+                      />
+                      <div class="rounded-full w-6 h-6 bg-white border border-black"></div>
+                      3 UNITS
+                    </div>
+                    <div
+                      class="text-xs md:text-sm ml-3 md:ml-6 rounded-full bg-save border border-gray-600 px-2 py-[.25rem]"
+                    >
+                      SAVE $XX
+                    </div>
+                    <div class="flex flex-col ml-auto text-2xl text-center rounded-full">
+                      $66.XX
+                      <span class="text-sm text-center text-gray-300 strikethrough">$XX.XX</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+            </ul>
+          </p>
         </div>
       </div>
 
@@ -443,13 +533,17 @@ import Image from 'astro/components/Image.astro'
   // Links
   const links = {
     lamb: {
-      onetime: 'lamb-onetime-link',
+      onetime1: 'lamb-onetime1-link',
+      onetime2: 'lamb-onetime2-link',
+      onetime3: 'lamb-onetime3-link',
       sub1: 'lamb-sub1-link',
       sub2: 'lamb-sub2-link',
       sub3: 'lamb-sub3-link',
     },
     venison: {
-      onetime: 'venison-onetime-link',
+      onetime1: 'venison-onetime1-link',
+      onetime2: 'venison-onetime2-link',
+      onetime3: 'venison-onetime3-link',
       sub1: 'venison-sub1-link',
       sub2: 'venison-sub2-link',
       sub3: 'venison-sub3-link',
@@ -470,33 +564,58 @@ import Image from 'astro/components/Image.astro'
   let currentPackage = packageChoice
 
   const updateLink = () => {
-    if (currentFrequency === 'onetime') {
-      cartButton.setAttribute('href', `${links[currentProtein][currentFrequency]}`)
-      cartButton.textContent = `${links[currentProtein][currentFrequency]}`
-    } else {
-      cartButton.setAttribute('href', `${links[currentProtein][currentPackage]}`)
-      cartButton.textContent = `${links[currentProtein][currentPackage]}`
-    }
+    cartButton.setAttribute('href', `${links[currentProtein][currentFrequency + currentPackage]}`)
+    cartButton.textContent = `${links[currentProtein][currentFrequency + currentPackage]}`
+
+    console.log(`
+      Current Protein: ${currentProtein}
+      Current Frequency: ${currentFrequency}
+      Current Package: ${currentPackage}
+
+      Link: ${links[currentProtein][currentFrequency + currentPackage]}
+    `)
   }
 
   updateLink()
 
   const addListeners = (query) => {
-    query.forEach((protein, index) => {
-      protein.addEventListener('click', () => {
-        query.forEach((protein) => {
-          protein.classList.remove('selected')
-        })
-
+    query.forEach((item, index) => {
+      item.addEventListener('click', () => {
         if (query === proteins) {
           currentProtein = query[index].getAttribute('data-value')
         } else if (query === frequencies) {
           currentFrequency = query[index].getAttribute('data-value')
+
+          if (currentFrequency === 'sub') {
+            currentPackage = document.querySelector('#sub-tab .selected').getAttribute('data-value')
+          } else {
+            currentPackage = document.querySelector('#onetime-tab .selected').getAttribute('data-value')
+          }
         } else if (query === packages) {
-          currentPackage = query[index].getAttribute('data-value')
+          const subTab = document.querySelectorAll('#sub-tab .package-choice')
+          const subTabSelected = document.querySelector('#sub-tab .selected')
+          const onetimeTab = document.querySelectorAll('#onetime-tab .package-choice')
+          const onetimeTabSelected = document.querySelector('#onetime-tab .selected')
+
+          if (currentFrequency === 'sub') {
+            for (let item of [...subTab]) {
+              if (item.getAttribute('data-value') !== query[index].getAttribute('data-value')) {
+                item.classList.remove('selected')
+                currentPackage = subTabSelected.getAttribute('data-value')
+              }
+            }
+          } else {
+            for (let item of onetimeTab) {
+              if (item.getAttribute('data-value') !== query[index].getAttribute('data-value')) {
+                item.classList.remove('selected')
+                currentPackage = onetimeTabSelected.getAttribute('data-value')
+              }
+            }
+          }
+
+          query[index].classList.add('selected')
         }
 
-        query[index].classList.add('selected')
         updateLink()
       })
     })
@@ -531,6 +650,12 @@ import Image from 'astro/components/Image.astro'
           @apply text-white font-bold;
         }
       }
+    }
+  }
+
+  .frequency-list {
+    .selected {
+      @apply bg-cpo text-white border-black;
     }
   }
 
@@ -571,7 +696,6 @@ import Image from 'astro/components/Image.astro'
     .bestseller,
     .bestvalue {
       &::before {
-        content: 'BEST VALUE';
         @apply absolute grid place-items-center bg-cpo text-white;
         top: 0;
         left: 0;

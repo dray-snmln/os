@@ -21,6 +21,7 @@ export default {
         lamb: '#35b997',
         venison: '#957daa',
         save: '#b4be37',
+        versus: '#f3f3f3',
       },
     },
   },

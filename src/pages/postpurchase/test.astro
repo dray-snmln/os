@@ -1,0 +1,24 @@
+---
+import Header from '../../layouts/Header.astro'
+import Footer from '../../layouts/Footer.astro'
+import Layout from '../../layouts/Layout.astro'
+
+import Offer from '../../layouts/offers/upsell.astro'
+---
+
+<Layout title="New Zealand Recipe Dog Food Rolls - Country Pet">
+  <Header />
+  <main>
+    <Offer />
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  const urlSearchParams = new paramsObject(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+
+  for (let [key, value] of Object.entries(params)) {
+    console.log(key, value)
+  }
+</script>

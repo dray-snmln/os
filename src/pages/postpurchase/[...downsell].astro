@@ -1,0 +1,178 @@
+---
+import Header from '../../layouts/Header.astro'
+import Footer from '../../layouts/Footer.astro'
+import Layout from '../../layouts/Layout.astro'
+import Downsell from '../../layouts/offers/downsell.astro'
+import data from '../../assets/products.js'
+
+export async function getStaticPaths() {
+  const pages = []
+  for (const item of data.products) {
+    pages.push({ ...item })
+  }
+
+  return pages.map(({ slug, type, title, quantity, price, selling_plan, product_id, image }) => {
+    let downsell = 'd-' + slug
+    return {
+      params: { downsell },
+      props: { slug, type, title, quantity, price, selling_plan, product_id, image },
+    }
+  })
+}
+
+const { slug, type, title, quantity, price, image, selling_plan, product_id } = Astro.props
+---
+
+<Layout title={title}>
+  <Header />
+  <Downsell
+    slug={slug}
+    type={type}
+    title={title}
+    quantity={quantity}
+    price={price}
+    image={image}
+    sellingPlan={selling_plan}
+    productId={product_id}
+  />
+  <div id="table-container" class="max-w-[500px] mx-auto my-6">URL Parameters</div>
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ data }}>
+  data.collections = {}
+  for (const product of data.products) {
+    !data.collections[product.type] ? (data.collections[product.type] = 1) : (data.collections[product.type] += 1)
+  }
+  console.log(data.collections)
+  console.log(data.products)
+
+  // Get current product information
+  const currentProductData = document.querySelector('#product')
+  const currentProduct = {
+    slug: currentProductData.getAttribute('data-slug'),
+    title: currentProductData.getAttribute('data-title'),
+    quantity: currentProductData.getAttribute('data-quantity'),
+    sellingPlan: currentProductData.getAttribute('data-selling-plan'),
+    productId: currentProductData.getAttribute('data-product-id'),
+  }
+
+  console.log(currentProduct)
+
+  // Funnel logic
+  // TODO: increment upsell and downsell count
+  // TODO: change page content based on count and offer type
+  // TODO: end flow when two upsells in a row
+
+  // Get URL Params
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+
+  const clearCart = () => {
+    localStorage.clear()
+    console.log('cart cleared')
+  }
+
+  for (const [key, value] of Object.entries(params)) {
+    if (key === 'new' && value === 'true') {
+      console.log('Key "new" has a value of true. Executing code...')
+      clearCart()
+    }
+  }
+
+  // Cart logic
+  let storedJSON = localStorage.getItem('cart') ? localStorage.getItem('cart') : []
+  let storedObjects = storedJSON.length !== 0 ? JSON.parse(storedJSON) : []
+  console.log(storedJSON)
+
+  // Check number of accepts
+  const checkAccept = (objects) => {
+    let count = 0
+    for (let obj of objects) {
+      if (obj.accepted === true) {
+        count++
+      }
+    }
+    console.log(count > 2 ? 'Ending funnel' : 'Going to upsell of different product')
+  }
+
+  // Button setup
+  const acceptButtons = document.querySelectorAll('.button.button-accept')
+  const declineButtons = document.querySelectorAll('.button.button-decline')
+
+  for (button of acceptButtons) {
+    button.addEventListener('click', () => {
+      let updatedProduct = { ...currentProduct, ['accepted']: true }
+      let updatedObjects = [...storedObjects]
+      updatedObjects.push(updatedProduct)
+      let updatedJSON = JSON.stringify(updatedObjects)
+      localStorage.setItem('cart', updatedJSON)
+      console.log(storedJSON)
+      checkAccept(updatedObjects)
+    })
+  }
+
+  for (button of declineButtons) {
+    button.addEventListener('click', () => {
+      let updatedProduct = { ...currentProduct, ['accepted']: true }
+      let updatedObjects = [...storedObjects]
+      updatedObjects.push(updatedProduct)
+      let updatedJSON = JSON.stringify(updatedObjects)
+      localStorage.setItem('cart', updatedJSON)
+      console.log(storedJSON)
+      checkAccept(updatedObjects)
+    })
+  }
+
+  // Replace words
+  const replaceWords = () => {
+    let replacedUnitElements = document.querySelectorAll('.replace-with-previous.replace-units')
+    let replacedProductElements = document.querySelectorAll('.replace-with-previous.replace-products')
+
+    if (storedObjects.length > 0 || ) {
+      for (let element of replacedUnitElements) {
+        element.textContent = `${storedObjects[storedObjects.length - 1].quantity} units`
+      }
+  
+      for (let element of replacedProductElements) {
+        element.textContent = storedObjects[storedObjects.length - 1].product
+      }
+    }
+  }
+
+  replaceWords()
+
+  // Set up URL query table
+  function createTableFromObject(obj) {
+    // Create table element
+    const table = document.createElement('table')
+
+    // Loop through key-value pairs of the object
+    for (const [key, value] of Object.entries(obj)) {
+      // Create table row
+      const row = document.createElement('tr')
+
+      // Create table data cells for key and value
+      const keyCell = document.createElement('td')
+      keyCell.textContent = key
+      const valueCell = document.createElement('td')
+      valueCell.textContent = value
+
+      // Append cells to row
+      row.appendChild(keyCell)
+      row.appendChild(valueCell)
+
+      // Append row to table
+      table.appendChild(row)
+    }
+
+    return table
+  }
+
+  // Get container element to append table
+  const container = document.getElementById('table-container')
+
+  // Create table from object and append to container
+  const table = createTableFromObject(params)
+  container.appendChild(table)
+</script>
