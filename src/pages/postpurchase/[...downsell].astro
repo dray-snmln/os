@@ -6,141 +6,555 @@ import Downsell from '../../layouts/offers/downsell.astro'
 import data from '../../assets/products.js'
 
 export async function getStaticPaths() {
+  const productTypes = data.products
   const pages = []
-  for (const item of data.products) {
-    pages.push({ ...item })
+
+  for (const productType of Object.keys(productTypes)) {
+    const variants = Object.keys(data['products'][productType])
+
+    for (const variant of variants) {
+      const { slug, title, onetime, subscription, price, productId, sellingPlan, link, image } =
+        data['products'][productType][variant]
+
+      const defaultOnetime = {
+        1: {
+          discount: 0,
+        },
+        3: {
+          discount: 0,
+        },
+        6: {
+          discount: 0,
+        },
+      }
+
+      const onetimeQuantities = onetime ? Object.keys(onetime) : Object.keys(defaultOnetime)
+      for (const quantity of onetimeQuantities) {
+        pages.push({
+          pageSlug: `otp-${slug}-${quantity}`,
+          hash: `otp-${slug}-${quantity}`,
+          slug: slug,
+          variant,
+          productType,
+          quantity: quantity,
+          price: price,
+          purchaseType: 'onetime',
+          productId: productId,
+          sellingPlan: sellingPlan,
+          title,
+          link,
+          image,
+        })
+      }
+
+      if (subscription) {
+        const subscriptionQuantities = Object.keys(subscription)
+
+        for (const quantity of subscriptionQuantities) {
+          const subscriptionData = subscription[quantity]
+          pages.push({
+            pageSlug: `sub-${slug}-${quantity}`,
+            hash: `sub-${slug}-${quantity}`,
+            slug: slug,
+            variant,
+            productType,
+            quantity: quantity,
+            price: subscriptionData.price,
+            purchaseType: 'subscription',
+            productId: productId,
+            sellingPlan: subscriptionData.sellingPlan,
+            title,
+            link,
+            image,
+          })
+        }
+      }
+    }
   }
 
-  return pages.map(({ slug, type, title, quantity, price, selling_plan, product_id, image }) => {
-    let downsell = 'd-' + slug
-    return {
-      params: { downsell },
-      props: { slug, type, title, quantity, price, selling_plan, product_id, image },
+  return pages.map(
+    ({
+      hash,
+      pageSlug,
+      slug,
+      variant,
+      productType,
+      title,
+      quantity,
+      price,
+      purchaseType,
+      image,
+      productId,
+      sellingPlan,
+      link,
+      pages,
+    }) => {
+      const downsell = `d-${pageSlug}`
+      return {
+        params: { downsell },
+        props: {
+          hash,
+          slug,
+          variant,
+          productType,
+          title,
+          quantity,
+          price,
+          purchaseType,
+          image,
+          productId,
+          sellingPlan,
+          link,
+          pages,
+        },
+      }
     }
-  })
+  )
 }
 
-const { slug, type, title, quantity, price, image, selling_plan, product_id } = Astro.props
+const baseUrl = Astro.url.origin
+
+const { hash, slug, productType, title, variant, quantity, price, purchaseType, image, sellingPlan, productId } =
+  Astro.props
 ---
 
 <Layout title={title}>
   <Header />
+  <button class="clearbutton size-5">Clear</button>
   <Downsell
+    hash={hash}
     slug={slug}
-    type={type}
+    variant={variant}
+    productType={productType}
     title={title}
     quantity={quantity}
     price={price}
+    purchaseType={purchaseType}
     image={image}
-    sellingPlan={selling_plan}
-    productId={product_id}
+    sellingPlan={sellingPlan}
+    productId={productId}
+    offerType="downsell"
   />
+  <pre id="container" class="overflow-hidden"></pre>
   <div id="table-container" class="max-w-[500px] mx-auto my-6">URL Parameters</div>
   <Footer />
 </Layout>
 
 <script is:inline define:vars={{ data }}>
-  data.collections = {}
-  for (const product of data.products) {
-    !data.collections[product.type] ? (data.collections[product.type] = 1) : (data.collections[product.type] += 1)
+  const onetime = Object.entries({
+    1: {
+      discount: 3,
+    },
+    3: {
+      discount: 6,
+    },
+    6: {
+      discount: 9,
+    },
+  })
+
+  const tests = []
+
+  for (const [key, { discount }] of onetime) {
+    const obj = {}
+    obj[key] = discount
+    tests.push(obj)
   }
-  console.log(data.collections)
-  console.log(data.products)
+  // console.log('quantities')
+  // console.log(tests)
+
+  const productTypes = data.products
+  const pages = []
+
+  for (const productType of Object.keys(productTypes)) {
+    const variants = Object.keys(data['products'][productType])
+
+    for (const variant of variants) {
+      const { slug, title, subscription, price, productId, sellingPlan, link, image } =
+        data['products'][productType][variant]
+
+      for (let [key, { discount }] of onetime) {
+        const obj = {}
+        obj[key] = discount
+
+        pages.push({
+          slug: `otp-${slug}-${Object.keys(obj)[0]}`,
+          productType,
+          quantity: key,
+          price: price * key - discount,
+          productId,
+          sellingPlan,
+          link,
+          image,
+          title,
+        })
+      }
+
+      if (subscription) {
+        const subscriptionQuantities = Object.keys(subscription)
+
+        for (const quantity of subscriptionQuantities) {
+          const subscriptionData = subscription[quantity]
+          pages.push({
+            slug: `sub-${slug}-${quantity}`,
+            title,
+            productType,
+            price: subscriptionData.price,
+            productId: subscriptionData.productId,
+            sellingPlan: subscriptionData.sellingPlan,
+            link,
+            image,
+          })
+        }
+      }
+    }
+  }
+
+  pages.map(({ slug, title, price, image, productId, sellingPlan, link, pages }) => {
+    const downsell = `d-${slug}`
+    return {
+      params: { downsell },
+      props: { slug, title, price, image, productId, sellingPlan, link, pages },
+    }
+  })
+
+  // Create a code block element
+  const codeBlock = document.createElement('code')
+  codeBlock.id = 'codeBlock'
+
+  // Construct a JSON string representation of the array
+  const jsonString = JSON.stringify(pages, null, 2)
+
+  // Set the JSON string as the content of the code block
+  codeBlock.textContent = jsonString
+
+  // Append the code block to the container element
+  const cont = document.querySelector('#container')
+  cont.appendChild(codeBlock)
+</script>
+
+<script is:inline define:vars={{ data, baseUrl }}>
+  // Clear local storage
+  const clearStorage = () => {
+    localStorage.removeItem('cart')
+    localStorage.removeItem('originalProduct')
+    console.log('cart cleared')
+  }
+  document.querySelector('.clearbutton').addEventListener('click', () => {
+    clearStorage()
+  })
+
+  // Get stored object in local storage
+  const getStored = (name) => {
+    let storedObject = localStorage.getItem(name)
+    return storedObject ? JSON.parse(storedObject) : null
+  }
 
   // Get current product information
   const currentProductData = document.querySelector('#product')
-  const currentProduct = {
+  const currentProduct = currentProductData && {
+    hash: currentProductData.getAttribute('data-hash'),
     slug: currentProductData.getAttribute('data-slug'),
-    title: currentProductData.getAttribute('data-title'),
+    variant: currentProductData.getAttribute('data-variant'),
+    productType: currentProductData.getAttribute('data-product-type'),
     quantity: currentProductData.getAttribute('data-quantity'),
     sellingPlan: currentProductData.getAttribute('data-selling-plan'),
     productId: currentProductData.getAttribute('data-product-id'),
+    offerType: currentProductData.getAttribute('data-offer-type'),
+    purchaseType: currentProductData.getAttribute('data-purchase-type'),
+    flag: null,
   }
 
+  console.log('Current Product')
   console.log(currentProduct)
 
-  // Funnel logic
-  // TODO: increment upsell and downsell count
-  // TODO: change page content based on count and offer type
-  // TODO: end flow when two upsells in a row
+  // Get cart
+  const getCart = () => {
+    let storedJSON = getStored('cart') ? getStored('cart') : []
+    let storedObjects = storedJSON.length !== 0 ? storedJSON : []
+
+    return [storedJSON, storedObjects]
+  }
+  console.log('Current cart')
+  console.log(getCart()[0])
+
+  // Add current product to cart
+  if (!getCart()[0].some((obj) => obj.hash === currentProduct.hash)) {
+    let updatedProduct = { ...currentProduct }
+    let updatedObjects = getCart()[0]
+    updatedObjects.push(updatedProduct)
+    let updatedJSON = JSON.stringify(updatedObjects)
+    localStorage.setItem('cart', updatedJSON)
+
+    console.log('Updated cart')
+    console.log(getCart()[0])
+  }
+
+  function snakeToKebabCase(str) {
+    // Replace underscores (_) with hyphens (-)
+    let kebabCaseStr = str.replace(/_/g, '-')
+    return kebabCaseStr
+  }
+
+  // Get keys needed to access key:value pair
+  const search = (value, obj) => {
+    const path = []
+
+    const searchPath = (obj, value) => {
+      for (const key in obj) {
+        path.push(key) // Add the current key to the path
+
+        if (obj[key] === value) {
+          return path // Found the value, return the path
+        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+          const nestedPath = searchPath(obj[key], value)
+          if (nestedPath) {
+            return nestedPath
+          }
+        }
+        path.pop() // Remove the current key from the path if the value is not found in this branch
+      }
+      return null // Value not found in this branch
+    }
+
+    return searchPath(obj, value)
+  }
+
+  // Check number of flags
+  const checkFlags = () => {
+    let objects = [...getCart()[1]]
+    let flags = {}
+
+    for (let obj of objects) {
+      if (obj.offerType === 'upsell' && obj.flag == 'accept') {
+        flags.upsellAcceptCount ? flags.upsellAcceptCount++ : (flags.upsellAcceptCount = 1)
+        flags.acceptAndSkipCount ? flags.acceptAndSkipCount++ : (flags.acceptAndSkipCount = 1)
+      } else if (obj.flag == 'accept' || obj.flag == 'skip') {
+        flags.acceptAndSkipCount ? flags.acceptAndSkipCount++ : (flags.acceptAndSkipCount = 1)
+      }
+    }
+
+    if (flags.upsellAcceptCount >= 2 || flags.acceptAndSkipCount > 2) {
+      handleCheckout()
+    } else {
+      console.log('Continue funnel')
+      return false
+    }
+  }
+
+  // Get next product's quantity
+  const getNextProductQuantity = (choice) => {
+    const quantities = [1, 3, 6]
+    let firstProductQuantity = getCart()[0][0].quantity
+
+    // If upsell button
+    if (choice === 'decline') {
+      if (currentProduct.quantity < firstProductQuantity) {
+        console.log(`use current product quantity ${currentProduct.quantity}`)
+        return firstProductQuantity
+      } else {
+        // Filter numbers less than firstProductQuantity to get next lowest
+        let nextLowest = quantities.filter((number) => number < firstProductQuantity)
+        // Get the maximum value from the filtered array
+        console.log(`next lowest: ${nextLowest}`)
+        return nextLowest
+      }
+    } else if (choice === 'accept') {
+      let nextHighest = quantities.find((number) => number >= firstProductQuantity)
+      console.log(`next highest: ${nextHighest}`)
+      return nextHighest
+    }
+  }
+
+  // Get product types that aren't in the cart
+  const getCartTypes = () => {
+    const cart = getStored('cart')
+    const cartTypes = {}
+
+    // Filter out products with types present in the cart
+    if (cart) {
+      for (item of cart) {
+        cartTypes[item.productType] ? cartTypes[item.productType]++ : (cartTypes[item.productType] = 1)
+      }
+
+      return Object.keys(cartTypes)
+    }
+
+    return 'Cart empty'
+  }
+
+  // Filter product types already in the cart and get a product from the remaining product types
+  const getNextProduct = (choice) => {
+    let cartProductTypes = getCartTypes()
+    let nextProduct
+
+    const productListArray = Object.entries(data.products)
+    const filteredProductTypeKeys = productListArray.filter((array) => {
+      return !array.some((element) => cartProductTypes.includes(element))
+    })
+    let firstProductTypeKey = filteredProductTypeKeys[0]?.[1] ? filteredProductTypeKeys[0][1] : null
+
+    // Find firstProductKey's object
+    let nextProductTypeObject
+    if (firstProductTypeKey) {
+      nextProductTypeObject = Object.entries(
+        Object.entries(data.products).find((arr) => arr.includes(firstProductTypeKey))[1]
+      )
+    }
+
+    if (!nextProductTypeObject) {
+      checkFlags()
+      return
+    }
+
+    // Get similar flavor to current product if available
+    let sameFlavor
+    if (nextProductTypeObject) {
+      sameFlavor = nextProductTypeObject.find((arr) => arr.includes(currentProduct.variant))
+
+      if (sameFlavor) {
+        nextProduct = sameFlavor[1]
+      } else if (nextProductTypeObject[0][1]) {
+        // Get first product if not
+        nextProduct = nextProductTypeObject[0][1]
+      } else {
+        return null
+      }
+    }
+
+    return nextProduct
+  }
+
+  // Handle link
+  const handleLink = (choice) => {
+    let linkProductType
+    if (choice == 'decline') {
+      if (currentProduct.quantity < getCart()[0][0].quantity) {
+        linkProductType = 'u'
+      } else {
+        linkProductType = 'd'
+      }
+    } else if (choice == 'accept') {
+      linkProductType = 'u'
+    }
+
+    let nextProduct = choice ? getNextProduct('accept') : getNextProduct('decline')
+
+    let linkOfferType
+    if (nextProduct) {
+      linkOfferType = nextProduct.subscription ? 'sub' : 'otp'
+    } else {
+      linkOfferType = currentProduct.purchaseType == 'subscription' ? 'sub' : 'otp'
+    }
+
+    let linkSlug
+    if (choice == 'decline' && currentProduct.quantity > getNextProductQuantity('decline')) {
+      linkSlug = `${currentProduct.slug}`
+      linkOfferType = currentProduct.purchaseType == 'subscription' ? 'sub' : 'otp'
+    } else {
+      if (nextProduct) {
+        linkSlug = nextProduct.slug
+      } else {
+        linkSlug = snakeToKebabCase(currentProduct.slug)
+      }
+    }
+
+    let linkQuantity
+    if (choice == 'accept') {
+      linkQuantity = getNextProductQuantity('accept')
+    } else {
+      linkQuantity = getNextProductQuantity('decline')
+    }
+
+    let link =
+      baseUrl + '/postpurchase/' + [linkProductType, linkOfferType, linkSlug, linkQuantity].filter((a) => a).join('-')
+
+    window.location.href = link
+    console.log(`Link: ${link}`)
+  }
+
+  const handleCheckout = () => {
+    return alert('end funnel')
+  }
 
   // Get URL Params
   const urlSearchParams = new URLSearchParams(window.location.search)
   const params = Object.fromEntries(urlSearchParams.entries())
 
-  const clearCart = () => {
-    localStorage.clear()
-    console.log('cart cleared')
-  }
-
+  // Iterate through URL Query Parameters
   for (const [key, value] of Object.entries(params)) {
+    // Clear local storage when URL has new=true parameter
     if (key === 'new' && value === 'true') {
       console.log('Key "new" has a value of true. Executing code...')
-      clearCart()
+      clearStorage()
+    }
+
+    // Store original product's product type in local storage when provided
+    if (key === 'ogpr') {
+      // Find the product with the matching slug in
+      let product = data.products.find((item) => item.slug === value)
+
+      // If the product is found, store its type; otherwise, return null
+      if (product) {
+        let newJSON = { type: product.slug, quantity: product.quantity, title: product.title }
+        localStorage.setItem('originalProduct', JSON.stringify(newJSON))
+
+        console.log(getStored('originalProduct'))
+      }
     }
   }
 
-  // Cart logic
-  let storedJSON = localStorage.getItem('cart') ? localStorage.getItem('cart') : []
-  let storedObjects = storedJSON.length !== 0 ? JSON.parse(storedJSON) : []
-  console.log(storedJSON)
-
-  // Check number of accepts
-  const checkAccept = (objects) => {
-    let count = 0
-    for (let obj of objects) {
-      if (obj.accepted === true) {
-        count++
+  const buttonHandler = (choice) => {
+    // Handle flags
+    let newFlag
+    if (choice == 'accept') {
+      newFlag = 'accept'
+    } else if (choice == 'decline') {
+      // Flag is skip if current product qty is equal to first product's qty && is equal to 1
+      if (
+        currentProduct.quantity < getCart()[0][0].quantity ||
+        (getCart()[0][0].quantity == 1 && currentProduct.quantity == 1)
+      ) {
+        console.log(`Current product qty: ${currentProduct.quantity}`)
+        console.log(`First product in cart qty: ${getCart()[0][0].quantity}`)
+        newFlag = 'skip'
+      } else {
+        newFlag = 'decline'
       }
     }
-    console.log(count > 2 ? 'Ending funnel' : 'Going to upsell of different product')
+
+    let updatedObjects = [...getCart()[0]]
+    let updatedProduct = updatedObjects[updatedObjects.length - 1]
+    updatedProduct.flag = newFlag
+    let updatedJSON = JSON.stringify(updatedObjects)
+    localStorage.setItem('cart', updatedJSON)
+
+    checkFlags()
+
+    console.log(`Flag: ${updatedProduct.flag}`)
+    console.log(`Link: ${handleLink(choice)}`)
+    console.log(`Updated cart:`)
+    console.log(getCart()[0])
   }
 
   // Button setup
-  const acceptButtons = document.querySelectorAll('.button.button-accept')
-  const declineButtons = document.querySelectorAll('.button.button-decline')
+  const setupButtons = () => {
+    const acceptButtons = document.querySelectorAll('.button.button-accept')
+    const declineButtons = document.querySelectorAll('.button.button-decline')
 
-  for (button of acceptButtons) {
-    button.addEventListener('click', () => {
-      let updatedProduct = { ...currentProduct, ['accepted']: true }
-      let updatedObjects = [...storedObjects]
-      updatedObjects.push(updatedProduct)
-      let updatedJSON = JSON.stringify(updatedObjects)
-      localStorage.setItem('cart', updatedJSON)
-      console.log(storedJSON)
-      checkAccept(updatedObjects)
-    })
-  }
+    for (button of acceptButtons) {
+      button.addEventListener('click', () => {
+        buttonHandler('accept')
+      })
+    }
 
-  for (button of declineButtons) {
-    button.addEventListener('click', () => {
-      let updatedProduct = { ...currentProduct, ['accepted']: true }
-      let updatedObjects = [...storedObjects]
-      updatedObjects.push(updatedProduct)
-      let updatedJSON = JSON.stringify(updatedObjects)
-      localStorage.setItem('cart', updatedJSON)
-      console.log(storedJSON)
-      checkAccept(updatedObjects)
-    })
-  }
-
-  // Replace words
-  const replaceWords = () => {
-    let replacedUnitElements = document.querySelectorAll('.replace-with-previous.replace-units')
-    let replacedProductElements = document.querySelectorAll('.replace-with-previous.replace-products')
-
-    if (storedObjects.length > 0 || ) {
-      for (let element of replacedUnitElements) {
-        element.textContent = `${storedObjects[storedObjects.length - 1].quantity} units`
-      }
-  
-      for (let element of replacedProductElements) {
-        element.textContent = storedObjects[storedObjects.length - 1].product
-      }
+    for (button of declineButtons) {
+      button.addEventListener('click', () => {
+        buttonHandler('decline')
+      })
     }
   }
-
-  replaceWords()
+  setupButtons()
 
   // Set up URL query table
   function createTableFromObject(obj) {
@@ -175,4 +589,37 @@ const { slug, type, title, quantity, price, image, selling_plan, product_id } = 
   // Create table from object and append to container
   const table = createTableFromObject(params)
   container.appendChild(table)
+
+  // Tests
+  // first step - cart empty
+  // expected on accept: different product of same quantity
+  // expected on decline: if current product is 1, skip and get different product
+
+  // Case 1
+
+  // console.log('Tests')
+  // console.log('Two Upsell Products In Cart')
+  // const twoUpsell = [
+  //   {
+  //     slug: 'sub-lamb-rolls-3',
+  //     quantity: '1',
+  //     sellingPlan: 'sell345lamb',
+  //     productId: 'prod345lamb',
+  //     offerType: 'upsell',
+  //     status: 'accept',
+  //   },
+  //   {
+  //     slug: 'sub-venison-rolls-3',
+  //     quantity: '1',
+  //     sellingPlan: 'sell345venison',
+  //     productId: 'prod345venison',
+  //     offerType: 'upsell',
+  //     status: 'accept',
+  //   },
+  // ]
+  // if (checkFlags(twoUpsell).upsellAcceptCount == 2) {
+  //   console.log('passed')
+  // } else {
+  //   console.log('failed')
+  // }
 </script>

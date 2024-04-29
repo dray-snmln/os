@@ -2,7 +2,21 @@
 import { Image } from 'astro:assets'
 
 const images = import.meta.glob('/src/assets/images/products/*.{jpeg,jpg,png,gif}')
-const { slug, type, title, quantity, price, sellingPlan, productId, image, offerType } = Astro.props
+const {
+  hash,
+  slug,
+  variant,
+  productType,
+  type,
+  title,
+  quantity,
+  price,
+  purchaseType,
+  sellingPlan,
+  productId,
+  image,
+  offerType,
+} = Astro.props
 if (!images[image]) {
   throw new Error(`"${image}" does not exist in glob: "/src/assets/images/products/*.{jpeg,jpg,png,gif}"`)
 }
@@ -81,7 +95,7 @@ if (!images[image]) {
     <!-- End Stepper -->
   </div>
 
-  <div class="layout-1">
+  <div class="layout-1 hidden">
     <h2 class="text-center text-cpo font-normal">WAIT! Hang On!</h2>
     <div class="flex flex-col gap-4">
       <p>
@@ -97,6 +111,24 @@ if (!images[image]) {
       <p>We know you'll love the way it makes you feel, so give it a try today!</p>
     </div>
   </div>
+  <div class="layout-2 hidden">
+    <h2>Layout 2</h2>
+  </div>
+  <div class="layout-3 hidden">
+    <h2>Layout 3</h2>
+  </div>
+  <div class="layout-4 hidden">
+    <h2>Layout 4</h2>
+  </div>
+  <div class="layout-5 hidden">
+    <h2>Layout 5</h2>
+  </div>
+  <div class="layout-6 hidden">
+    <h2>Layout 6</h2>
+  </div>
+  <div class="layout-7 hidden">
+    <h2>Layout 7</h2>
+  </div>
 
   <h1 class="mb-2 leading-8">{title}{` - ${quantity} Unit${quantity > 1 ? 's' : ''}`}</h1>
   <h2 class="mb-2 leading-8">{type}</h2>
@@ -105,9 +137,13 @@ if (!images[image]) {
   <div
     id="product"
     class="flex w-full gap-3"
+    data-hash={hash}
     data-slug={slug}
+    data-variant={variant}
+    data-product-type={productType}
     data-title={title}
     data-type={type}
+    data-purchase-type={purchaseType}
     data-quantity={quantity}
     data-selling-plan={sellingPlan}
     data-product-id={productId}

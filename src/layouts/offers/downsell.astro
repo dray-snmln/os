@@ -2,9 +2,24 @@
 import { Image } from 'astro:assets'
 
 const images = import.meta.glob('/src/assets/images/products/*.{jpeg,jpg,png,gif}')
-const { slug, type, title, quantity, price, sellingPlan, productId, image } = Astro.props
-if (!images[image])
+const {
+  hash,
+  slug,
+  variant,
+  productType,
+  type,
+  title,
+  quantity,
+  price,
+  purchaseType,
+  sellingPlan,
+  productId,
+  image,
+  offerType,
+} = Astro.props
+if (!images[image]) {
   throw new Error(`"${image}" does not exist in glob: "/src/assets/images/products/*.{jpeg,jpg,png,gif}"`)
+}
 ---
 
 <section class="min-h-[50vh] max-w-[700px] mx-auto mt-10">
@@ -103,16 +118,21 @@ if (!images[image])
 
   <div
     id="product"
-    class="flex w-full max-w-[50%] gap-3"
+    class="flex w-full gap-3"
+    data-hash={hash}
     data-slug={slug}
+    data-variant={variant}
+    data-product-type={productType}
     data-title={title}
     data-type={type}
+    data-purchase-type={purchaseType}
     data-quantity={quantity}
     data-selling-plan={sellingPlan}
     data-product-id={productId}
+    data-offer-type={offerType}
   >
-    <Image src={images[image]()} alt="" class="max-w-[50%]" inferSize />
-    <div class="flex flex-col w-full justify-center">
+    <Image src={images[image]()} alt="" class="w-full max-w-[50%]" inferSize />
+    <div class="flex flex-col w-full max-w-[50%] justify-center">
       <button
         class="button button-accept flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-xl p-3 w-full"
         >Yes! I Want This Special Added To My Order</button

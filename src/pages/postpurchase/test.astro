@@ -2,23 +2,194 @@
 import Header from '../../layouts/Header.astro'
 import Footer from '../../layouts/Footer.astro'
 import Layout from '../../layouts/Layout.astro'
-
-import Offer from '../../layouts/offers/upsell.astro'
+import data from '../../assets/products.js'
+import data2 from '../../assets/oldproducts.js'
 ---
 
 <Layout title="New Zealand Recipe Dog Food Rolls - Country Pet">
   <Header />
   <main>
-    <Offer />
+    Test
+    <div id="container"></div>
   </main>
   <Footer />
 </Layout>
 
-<script is:inline>
-  const urlSearchParams = new paramsObject(window.location.search)
-  const params = Object.fromEntries(urlSearchParams.entries())
+<script is:inline define:vars={{ data, data2 }}>
+  // const testy = [
+  //   {
+  //     slug: 'venison',
+  //     title: 'Venison Recipe Dog Food Rolls',
+  //     price: '11',
+  //     product_id: '1',
+  //     subscription: {
+  //       1: {
+  //         price: 12,
+  //         product_id: 'prod123venison',
+  //       },
+  //       2: {
+  //         price: 34,
+  //         product_id: 'prod345venison',
+  //       },
+  //     },
+  //   },
+  //   {
+  //     slug: 'lamb',
+  //     title: 'Lamb Recipe Dog Food Rolls',
+  //     price: '11',
+  //     product_id: '1',
+  //     subscription: {
+  //       1: {
+  //         price: 12,
+  //         product_id: 'prod123lamb',
+  //       },
+  //       2: {
+  //         price: 34,
+  //         product_id: 'prod345lamb',
+  //       },
+  //     },
+  //   },
+  // ]
+  // const newTest = (array) => {
+  //   const newArray = []
+  //   for (let product of array) {
+  //     const { slug, subscription, title, price, product_id } = product
+  //     newArray.push({
+  //       params: { slug },
+  //       props: { slug, title, price, product_id },
+  //     })
 
-  for (let [key, value] of Object.entries(params)) {
-    console.log(key, value)
+  //     if (subscription) {
+  //       for (let quantity of Object.keys(subscription)) {
+  //         const subscriptionData = subscription[quantity]
+  //         newArray.push({
+  //           params: { slug: `${slug}-${subscriptionData.quantity}` },
+  //           props: { slug, title, price: subscriptionData.price, product_id: subscriptionData.product_id },
+  //         })
+  //       }
+  //     }
+  //   }
+  //   console.log(newArray)
+  // }
+  // const datum = data1
+  // console.log(data1)
+
+  // const productTypes = datum.products
+  // const pages1 = []
+  // console.log(productTypes)
+
+  // for (const productType of Object.keys(productTypes)) {
+  //   const variants = Object.keys(datum['products'][productType])
+  //   console.log(productType)
+  //   console.log(variants)
+
+  //   for (const variant of variants) {
+  //     console.log(variant)
+  //     console.log(Object.keys(datum.products.rolls.lamb))
+
+  //     const { slug, title, subscription, price, product_id, selling_plan, link, image } =
+  //       datum['products'][productType][variant]
+  //     pages1.push({
+  //       slug: `${slug}`,
+  //       price,
+  //       product_id,
+  //       selling_plan,
+  //       link,
+  //       image,
+  //       title,
+  //     })
+  //     console.log(pages1)
+
+  //     if (subscription) {
+  //       const subscriptionQuantities = Object.keys(subscription)
+
+  //       for (const quantity of subscriptionQuantities) {
+  //         const subscriptionData = subscription[quantity]
+  //         pages1.push({
+  //           slug: `${slug}-${subscriptionData.quantity}`,
+  //           price: subscriptionData.price,
+  //           product_id: subscriptionData.product_id,
+  //           selling_plan: subscriptionData.selling_plan,
+  //           title,
+  //           link,
+  //           image,
+  //         })
+  //       }
+  //     }
+  //   }
+  // }
+
+  // pages1.map(({ slug, title, price, image, product_id, selling_plan, link }) => {
+  //   const upsell = `u-${slug}`
+  //   return {
+  //     params: { upsell },
+  //     props: { slug, title, price, image, product_id, selling_plan, link },
+  //   }
+  // })
+
+  // // Old
+  // const pages2 = []
+  // for (const item of data2.products) {
+  //   pages2.push({ ...item })
+  // }
+
+  // pages2.map(({ slug, type, title, quantity, price, selling_plan, product_id, image }) => {
+  //   let downsell = 'd-' + slug
+  //   return {
+  //     params: { downsell },
+  //     props: { slug, type, title, quantity, price, selling_plan, product_id, image },
+  //   }
+  // })
+
+  // console.log(pages1)
+  // console.log(pages2)
+
+  // //
+
+  // // Create a code block element
+  // const codeBlock = document.createElement('code')
+  // codeBlock.id = 'codeBlock'
+
+  // // Construct a JSON string representation of the array
+  // const jsonString = JSON.stringify(pages1, null, 2)
+
+  // // Set the JSON string as the content of the code block
+  // codeBlock.textContent = jsonString
+
+  // // Append the code block to the container element
+  // const cont = document.querySelector('#container')
+  // cont.appendChild(codeBlock)
+  // console.log(codeBlock)
+</script>
+
+<script is:inline define:vars={{ data }}>
+  const getNextProductSlug = (array) => {
+    let newProductData = {}
+    let filteredProductTypeKeys = Object.keys(data.products).filter((productType) => !array.includes(productType))
+    const newProductKey = Object.keys(data.products[filteredProductTypeKeys])[0]
+    const newProduct = data.products[filteredProductTypeKeys[0]][newProductKey]
+
+    console.log('next product')
+    console.log(newProduct)
+    return newProduct
   }
+
+  // empty cart
+  const case1 = () => {
+    const currentProduct = {
+      slug: 'sub-venison-rolls-3',
+      productType: 'rolls',
+      quantity: '1',
+      sellingPlan: 'sell345venison',
+      productId: 'prod345venison',
+      offerType: 'upsell',
+      purchaseType: 'subscription',
+    }
+
+    getNextProductSlug(Object.entries(currentProduct))
+
+    console.log(currentProduct)
+  }
+
+  case1()
 </script>
