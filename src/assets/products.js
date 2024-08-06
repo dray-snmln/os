@@ -23,17 +23,20 @@ const data = {
         subscription: {
           1: {
             price: 12,
+            discount: 1,
             sellingPlan: 'sell123lamb',
             link: 'roll-lamb-sub-link-1',
           },
           3: {
             price: 34,
+            discount: 3,
             productId: 'prod345lamb',
             sellingPlan: 'sell345lamb',
             link: 'roll-lamb-sub-link-3',
           },
           6: {
             price: 67,
+            discount: 6,
             productId: 'prod678lamb',
             sellingPlan: 'sell678lamb',
             link: 'roll-lamb-sub-link-6',
@@ -50,18 +53,21 @@ const data = {
         subscription: {
           1: {
             price: 12,
+            discount: 1,
             productId: 'prod123venison',
             sellingPlan: 'sell123venison',
             link: 'roll-venison-sub-link-1',
           },
           3: {
             price: 34,
+            discount: 2,
             productId: 'prod345venison',
             sellingPlan: 'sell345venison',
             link: 'roll-venison-sub-link-3',
           },
           6: {
             price: 67,
+            discount: 3,
             productId: 'prod678venison',
             sellingPlan: 'sell678venison',
             link: 'roll-venison-sub-link-6',
@@ -74,7 +80,7 @@ const data = {
         slug: 'beef-treats',
         variant: 'beef',
         title: 'New Zealand Raw Freeze-Dried Beef Liver Treats',
-        price: '19.99',
+        price: '20',
         productId: 'onetime123beeftreats',
         sellingPlan: '1234567890',
         image: '/src/assets/images/products/green.png',
@@ -83,10 +89,37 @@ const data = {
         slug: 'lamb-treats',
         variant: 'lamb',
         title: 'New Zealand Raw Freeze-Dried Lamb Liver Treats',
-        price: '19.99',
+        price: '20',
         productId: 'onetime123lambtreats',
         sellingPlan: '1234567890',
         image: '/src/assets/images/products/green.png',
+        onetime: {
+          1: 0,
+          3: 0,
+          6: 0,
+        },
+        subscription: {
+          1: {
+            price: 12,
+            discount: 0,
+            sellingPlan: 'sell123lamb',
+            link: 'treats-lamb-sub-link-1',
+          },
+          3: {
+            price: 34,
+            discount: 0,
+            productId: 'prod345lamb',
+            sellingPlan: 'sell345lamb',
+            link: 'treats-lamb-sub-link-3',
+          },
+          6: {
+            price: 67,
+            discount: 0,
+            productId: 'prod678lamb',
+            sellingPlan: 'sell678lamb',
+            link: 'treats-lamb-sub-link-6',
+          },
+        },
       },
     },
     supplements: {

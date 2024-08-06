@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets'
+let formatter = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 const images = import.meta.glob('/src/assets/images/products/*.{jpeg,jpg,png,gif}')
 const {
@@ -11,6 +12,7 @@ const {
   title,
   quantity,
   price,
+  discount,
   purchaseType,
   sellingPlan,
   productId,
@@ -22,7 +24,7 @@ if (!images[image]) {
 }
 ---
 
-<section class="min-h-[50vh] max-w-[700px] mx-auto mt-10">
+<section class="min-h-[50vh] max-w-[740px] px-6 mx-auto mt-10">
   <div class="max-w-[80%] mx-auto mb-10">
     <!-- Stepper -->
     <ul class="relative flex flex-row gap-x-2 mx-auto">
@@ -95,7 +97,8 @@ if (!images[image]) {
     <!-- End Stepper -->
   </div>
 
-  <div class="layout-1">
+  <div class="layout-1 hidden">
+    <h2>Layout 1 - Downsell</h2>
     <h2 class="text-center text-cpo font-normal">WAIT! Hang On!</h2>
     <div class="flex flex-col gap-4">
       <p>
@@ -111,10 +114,39 @@ if (!images[image]) {
       <p>We know you'll love the way it makes you feel, so give it a try today!</p>
     </div>
   </div>
+  <div class="layout-2 hidden">
+    <h2>Layout 2 - Downsell</h2>
+    <h2 class="text-center text-cpo font-normal">WAIT! HERE'S A SPECIAL OFFER JUST FOR YOU...</h2>
+    <div class="flex flex-col gap-4">
+      <p>
+        We understand that <span class="replace-with-previous replace-units">some units</span> of
+        <span class="replace-with-previous replace-products">products</span> may be too much of a commitment right now, but
+        we still want you to enjoy all the digestive benefits from
+        <span class="replace replace-products">products</span>, and some savings, too.
+      </p>
+      <p>
+        That's why we wanted to make sure to pass along a special price on
+        <span class="replace replace-units">3 units</span> of <span class="replace replace-products">products</span>.
+      </p>
+      <p>We know you'll love the way it makes you feel, so give it a try today!</p>
+    </div>
+  </div>
+  <div class="layout-3 hidden">
+    <h2>Layout 3 - Downsell</h2>
+    <h2 class="mb-6 text-center text-cpo font-normal">WAIT! Want even bigger savings?</h2>
+  </div>
+  <div class="layout-4 hidden">
+    <h2>Layout 4 - Downsell</h2>
+  </div>
+  <div class="layout-5 hidden">
+    <h2>Layout 5 - Downsell</h2>
+  </div>
+  <div class="layout-6 hidden">
+    <h2>Layout 6 - Downsell</h2>
+  </div>
 
   <h1 class="mb-2 leading-8">{title}{` - ${quantity} Unit${quantity > 1 ? 's' : ''}`}</h1>
   <h2 class="mb-2 leading-8">{type}</h2>
-  <h2 class="mb-8 text-2xl">${price}</h2>
 
   <div
     id="product"
@@ -133,8 +165,17 @@ if (!images[image]) {
   >
     <Image src={images[image]()} alt="" class="w-full max-w-[50%]" inferSize />
     <div class="flex flex-col w-full max-w-[50%] justify-center">
+      <h2 class=`font-normal text-center text-2xl ${discount > 0 ? 'line-through' : ''}`>
+        Regular Price: ${formatter.format(price)}
+      </h2>
+      <h2 class="font-normal text-center text-2xl text-cpo">
+        {discount > 0 ? 'Savings: $' + formatter.format(discount) : null}
+      </h2>
+      <h2 class="font-normal text-center text-2xl">
+        {discount > 0 ? 'Your Price: $' + formatter.format(price - discount) : null}
+      </h2>
       <button
-        class="button button-accept flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-xl p-3 w-full"
+        class="button button-accept flex justify-center items-center rounded-lg hover:cursor-pointer hover:text-white hover:bg-orange-500 hover:opacity-90 transition bg-cpo text-white text-xl mt-4 p-3 w-full"
         >Yes! I Want This Special Added To My Order</button
       >
       <span class="flex items-center justify-center text-center"> - OR - </span>
